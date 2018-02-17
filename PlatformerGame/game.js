@@ -13,6 +13,24 @@ var gridSquareSizeY;
 // Variable to hold all of our game objects
 var gameObjects;
 
+// Get the player sprite and rectangle
+var playerImg;
+var playerRect;
+
+// Set the player speed
+PLAYER_SPEED = 3;
+
+// Key codes
+SPACE = 32;
+
+// Load objects in before the game loads
+function preload() {
+    
+    // Get the sprite image
+    playerImg = loadImage("assets/player.png");
+    
+}
+
 // Create the setup function to run before the game is initialized
 function setup() {
     
@@ -23,15 +41,16 @@ function setup() {
     gridSquareSizeX = cWidth / gridSquaresX;
     gridSquareSizeY = cHeight / gridSquaresY;
     
+    // Get the player rectangle
+    playerRect = Rectangle(300, 300, gridSquareSizeX, 2*gridSquareSizeY);
+    
     // Create an empty array to hold the game objects
     gameObjects = [];
     
-    // Create a tree 
-    makeTree(3, 20, "evergreen", 1);
-    makeTree(3, 10, "evergreen", 2);
-    makeTree(10, 10, "evergreen", 3);
-    makeTree(17, 10, "evergreen", 4);
-    makeTree(25, 10, "evergreen", 6);
+    // Make the ground
+    for (var i = 0; i < 20; i++) {
+        gameObjects.push(GameObject(10+i, 20, color(81, 67, 15), "ground"));
+    }
     
 }
 
@@ -41,89 +60,39 @@ function draw() {
     // Clear the canvas
     clear();
     
+    // Physics update
+    physics();
+    
     // Draw the grid
     drawGrid();
         
     // Draw all of the game objects
     drawGameObjects();
     
-}
-
-// Create a function to draw all of the grid squares
-function drawGrid() {
+    // Draw the player
+    drawPlayer();
     
-    // Look at each horizontal grid square
-    for (var i = 0; i < gridSquaresX; i++) {
-        
-        // Look at each vertical grid square
-        for (var j = 0; j < gridSquaresY; j++) {
-            
-            // Draw a blank rect at the specified location
-            drawGridSquare(i, j, gridSquareSizeX, gridSquareSizeY, color(255));
-            
-        }
-        
+    // Check key presses
+    if (keyIsDown(RIGHT_ARROW)) {
+        playerRect.x+=PLAYER_SPEED;
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+        playerRect.x-=PLAYER_SPEED;
     }
     
 }
 
-// Create a function to draw all of the game objects
-function drawGameObjects() {
+// Function to check key presses
+function keyPressed() {
     
-    // Look at each game object
-    for (var i = 0; i < gameObjects.length; i++) {
+    // Check for space bar and not jumped
+    if (keyCode == SPACE && !jumped) {
         
-        // Draw the game object
-        drawGridSquare(gameObjects[i].x, gameObjects[i].y, gridSquareSizeX, gridSquareSizeY, gameObjects[i].colour);
+        // Set the y speed to jump speed
+        ySpeed = jumpSpeed;
         
-    }
-    
-}
-
-// Function to draw a grid square
-function drawGridSquare(x, y, width, height, colour) {
-    
-    // Draw a gridSquare at the specified location
-    drawRect(x * gridSquareSizeX, y * gridSquareSizeY, gridSquareSizeX, gridSquareSizeY, colour);
-    
-}
-
-// Create a function to draw a rectangle
-function drawRect(x, y, width, height, colour) {
-    
-    // Set the fill colour
-    fill(colour);
-    
-    // Draw the rect
-    quad(x,y, x+ width,y, x + width,y+height, x,y+height)
-    
-}
-
-// Function to create a game object
-function GameObject(_x, _y, _colour, _type) {
-    
-    // Return a new game object with the set parameters
-    return {x: _x, y: _y, colour: _colour, type: _type};
-    
-}
-
-// Function to create a tree
-function makeTree(x, y, type, height) {
-    
-    // Create the trunk and leaves
-    for (var i = 0; i < height; i++) {
-        
-        // Add the trunk game objects
-        gameObjects.push(GameObject(x, y - i, color(83, 53, 10), "trunk"+type));
-        
-        // Make the leaves
-        for (var j = i; j < height; j++) {
-            
-            // Add a leaf
-            gameObjects.push(GameObject(x+j-height+1,y-height-i+1, color(50,230,90), "leaf"+type));
-            gameObjects.push(GameObject(x-j+height-1,y-height-i+1, color(50,230,90), "leaf"+type));
-            
-        }
+        // Set jumped to true
+        jumped = true;
         
     }
     
