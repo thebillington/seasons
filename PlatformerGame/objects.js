@@ -15,7 +15,9 @@ function GameObject(_x, _y, _colour, _type) {
 }
 
 // Function to create a tree
-function makeTree(x, y, type, height) {
+function makeTree(x, y, height, type) {
+
+    console.log(gameObjects);
     
     // Create the trunk and leaves
     for (var i = 0; i < height; i++) {
@@ -35,3 +37,19 @@ function makeTree(x, y, type, height) {
     }
     
 }
+
+// Function to create a puddle
+
+function makeWater(x, y, length, height, type) {
+        
+        //for the length of the puddle
+        for (var i = 0; i < length; i++) {
+            //and for the height of the puddle
+            for(var j = 0; j < height; j++) {
+                //incrementally add pixels to fill the boundries of the puddle object with a blue colour and puddle type
+                gameObjects.push(GameObject(x + i , y - j, color(104, 120, 201), "water"+type))
+            }
+        }
+        
+
+    }

@@ -51,6 +51,9 @@ function setup() {
     for (var i = 0; i < 20; i++) {
         gameObjects.push(GameObject(10+i, 20, color(81, 67, 15), "ground"));
     }
+
+    makeTree(16,19,4,"evergreen");
+    makeWater(17, 19, 10, 2, "lake");
     
 }
 
