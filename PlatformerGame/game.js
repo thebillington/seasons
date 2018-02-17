@@ -26,8 +26,12 @@ function setup() {
     // Create an empty array to hold the game objects
     gameObjects = [];
     
-    // Add a game object
-    gameObjects.push(GameObject(5, 5, color(50, 255, 255), "ice"));
+    // Create a tree 
+    makeTree(3, 20, "evergreen", 1);
+    makeTree(3, 10, "evergreen", 2);
+    makeTree(10, 10, "evergreen", 3);
+    makeTree(17, 10, "evergreen", 4);
+    makeTree(25, 10, "evergreen", 6);
     
 }
 
@@ -96,9 +100,31 @@ function drawRect(x, y, width, height, colour) {
 }
 
 // Function to create a game object
-function GameObject(_x, _y, _colour, _name) {
+function GameObject(_x, _y, _colour, _type) {
     
     // Return a new game object with the set parameters
-    return {x: _x, y: _y, colour: _colour, name: _name};
+    return {x: _x, y: _y, colour: _colour, type: _type};
+    
+}
+
+// Function to create a tree
+function makeTree(x, y, type, height) {
+    
+    // Create the trunk and leaves
+    for (var i = 0; i < height; i++) {
+        
+        // Add the trunk game objects
+        gameObjects.push(GameObject(x, y - i, color(83, 53, 10), "trunk"+type));
+        
+        // Make the leaves
+        for (var j = i; j < height; j++) {
+            
+            // Add a leaf
+            gameObjects.push(GameObject(x+j-height+1,y-height-i+1, color(50,230,90), "leaf"+type));
+            gameObjects.push(GameObject(x-j+height-1,y-height-i+1, color(50,230,90), "leaf"+type));
+            
+        }
+        
+    }
     
 }
