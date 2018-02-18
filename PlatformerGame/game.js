@@ -77,12 +77,9 @@ function setup() {
     currentSeason = 0;
   
     // Make the ground
-    makeGround(10, 20, 10, 1);
-    makeGround(10, 21, 10, 1);
-    makeGround(10, 22, 23, 1);
-    makeGround(30, 21, 6, 1);
-    makeGround(30, 20, 6, 1);
-    makeGround(30, 22, 6, 1);
+    makeGround(10, 22, 10, 3);
+    makeGround(20, 22, 10, 1);
+    makeGround(30, 22, 6, 3);
     makeGround(19, 11, 20, 1);
   
     // tree creation

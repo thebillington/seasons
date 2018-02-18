@@ -85,11 +85,16 @@ function makeGround(x, y, length, height) {
     for (var i = 0; i < length; i++) {
         //and for the height of the ground
         for(var j = 0; j < height; j++) {
+            // Check whether this ground should be collidable
+            var c = false;
+            if (j == height - 1) {
+                c = true;
+            }
             //incrementally add gameObjects with appropriate colour and type
-            summerObjects.push(GameObject(x + i , y - j, color(133,178,76), true, "summerground"))
-            autumnObjects.push(GameObject(x + i , y - j, color(81, 67, 15), true, "autumnground"))
-            winterObjects.push(GameObject(x + i , y - j, color(150, 168, 152), true, "winterground"))
-            springObjects.push(GameObject(x + i , y - j, color(96,128,56), true, "springground"))
+            summerObjects.push(GameObject(x + i , y - j, color(133,178,76), c, "summerground"))
+            autumnObjects.push(GameObject(x + i , y - j, color(81, 67, 15), c, "autumnground"))
+            winterObjects.push(GameObject(x + i , y - j, color(150, 168, 152), c, "winterground"))
+            springObjects.push(GameObject(x + i , y - j, color(96,128,56), c, "springground"))
         }
 
     }       
