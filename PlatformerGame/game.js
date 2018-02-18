@@ -75,20 +75,9 @@ function setup() {
 
     // Initilise the season to summer
     currentSeason = 0;
-  
-    // Make the ground
-    makeGround(10, 21, 10, 2);
-    makeGround(10, 22, 26, 1);
-    makeGround(20, 22, 10, 1);
-    makeGround(30, 21, 6, 2);
-    makeGround(19, 11, 20, 1);
-  
-    // tree creation
-    makeTree(16,19,4);
-    // water creation
-    makeWater(20, 21, 10, 2);
-    // terrain creation
-    makeRock(10, 19, 2);
+    
+    // Load the level
+    loadLevel("levelOne.txt");
 
     //initilise starting world to summer objects
     gameObjects = summerObjects;
