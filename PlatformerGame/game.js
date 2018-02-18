@@ -128,6 +128,7 @@ function draw() {
         else {
             changeAnimationFrames("rWalk");
         }
+        prevX = playerRect.x;
         playerRect.x+=PLAYER_SPEED;
     }
     else if (keyIsDown(LEFT_ARROW)) {
@@ -138,10 +139,22 @@ function draw() {
         else {
             changeAnimationFrames("lWalk");
         }
+        prevX = playerRect.x;
         playerRect.x-=PLAYER_SPEED;
     }
     else {
         changeAnimationFrames("still");
+    }
+    
+    // Check for space bar and not jumped
+    if (keyIsDown(SPACE) && !jumped) {
+        
+        // Set the y speed to jump speed
+        ySpeed = jumpSpeed;
+        
+        // Set jumped to true
+        jumped = true;
+        
     }
     
 }
@@ -169,17 +182,6 @@ function changeSeason(currentSeason) {
 
 // Function to check key presses
 function keyPressed() {
-    
-    // Check for space bar and not jumped
-    if (keyCode == SPACE && !jumped) {
-        
-        // Set the y speed to jump speed
-        ySpeed = jumpSpeed;
-        
-        // Set jumped to true
-        jumped = true;
-        
-    }
 
     // Check for key press s
     if (keyCode == KEY_S && !drowning) {

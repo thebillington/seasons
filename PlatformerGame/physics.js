@@ -1,11 +1,13 @@
-// Setup gravity
+// Setup physics
 var gravity = 0.07;
+var xSpeed = 0;
 var ySpeed = 0;
 var fallSpeed = 2;
 var jumpSpeed = -2;
 var jumped = false;
 var prevX = 0;
 var prevY = 0;
+var onIce = false;
 
 // Physics update
 function physics() {
@@ -13,15 +15,15 @@ function physics() {
     // Check gravity
     testGravity();
     
-    // Store the previous locations
-    prevX = playerRect.x;
-    prevY = playerRect.y;
-    
-    // Move the player by fall speed
-    playerRect.y += ySpeed;
-    
     // Check if the player has collided with any game objects
     playerCollision();
+    
+    // Store the previous locations
+    prevY = playerRect.y;
+    
+    // Move the player
+    playerRect.x += xSpeed;
+    playerRect.y += ySpeed;
     
 }
 
@@ -40,6 +42,9 @@ function testGravity() {
 
 // Collision detection for the player
 function playerCollision() {
+    
+    // Store whether this round of physics checks has collided with ice
+    var currentIce = false;
     
     // Look at each game object
     for (var i = 0; i < gameObjects.length; i++) {
@@ -60,8 +65,28 @@ function playerCollision() {
                     // Set drowning to false
                     drowning = false;
                     
+                    // Set on ice to false
+                    onIce = false;
+                    
                 }
                 
+            }
+            
+            // Check for ice
+            if (gameObjects[i].type == "ice") {
+                
+                // Check for collision
+                if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+                    
+                    // Set ice collide flag
+                    onIce = true;
+                    
+                    // Set current ice to true
+                    currentIce = true;
+                    
+                    // Reset jump
+                    jumped = false;
+                }
             }
         
             // If the player collided with the object
@@ -69,12 +94,20 @@ function playerCollision() {
 
                 // Move the player up until they aren't colliding
                 playerRect.y -= gravity;
-
-                // Set jumped to false
-                jumped = false;
                 
                 // Set the y speed to 0
                 ySpeed = 0;
+                
+                // Reset jump
+                jumped = false;
+                
+                // If we aren't on ice
+                if (!currentIce) {
+                    
+                    // Set on ice to false
+                    onIce = false;
+                    
+                }
 
             }
             
@@ -104,6 +137,22 @@ function playerCollision() {
             
         }
         
+    }
+    // Check whether we were on any ice
+    if (!onIce || drowning) {
+        xSpeed = 0;
+    }
+    else {
+
+        // Check the previous x location
+        if (prevX < playerRect.x) {
+            // Set the x speed to move right
+            xSpeed = 1;
+        }
+        else if (prevX > playerRect.x) {
+            // Left
+            xSpeed = -1;
+        }
     }
     
 }
