@@ -6,6 +6,20 @@ function drawPlayer() {
     
 }
 
+// Function to draw the goal 
+function drawGoal(){
+    //Draw the goal on screen
+    drawRect(goalRect.x, goalRect.y, goalRect.width, goalRect.height, color(0));
+}
+
+// Function to draw the keys for the goal
+function drawKeys(){
+    // Draw the keys on screen
+    for(var i = 0; i < keyRect.length; i++) {
+        image(keyImg, keyRect[i].x, keyRect[i].y, keyRect[i].width, keyRect[i].height);
+    }
+}
+
 // Create a function to draw all of the grid squares
 function drawGrid() {
     
