@@ -88,8 +88,22 @@ function playerCollision() {
                     jumped = false;
                 }
             }
+            
+            // Check if this is ground
+            if (gameObjects[i].type == "ground") {
+                // Jump collision
+                while (jumpCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+
+                    // Move the player up until they aren't colliding
+                    playerRect.y += gravity;
+
+                    // Set the y speed to 0
+                    ySpeed = 0;
+
+                }
+            }
         
-            // If the player collided with the object
+            // Fall collision
             while (fallCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
 
                 // Move the player up until they aren't colliding
@@ -120,7 +134,7 @@ function playerCollision() {
             if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
             
                 // Set the ySpeed
-                ySpeed = gravity;
+                ySpeed = 0.2;
                 
                 // Set the drowning flag
                 drowning = true;
@@ -129,8 +143,8 @@ function playerCollision() {
             
         }
         
-        // If the game object is ground
-        if (gameObjects[i].type == "ground") {
+        // If the game object is ground or ice
+        if (gameObjects[i].type == "ground" || gameObjects.type == "ice") {
             
             // Check for side collision
             checkSideCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY});
@@ -182,6 +196,19 @@ function fallCollision(rectOne, rectTwo) {
     
     // Check whether the previous y location is greater than the top of the platform
     if (prevY + rectOne.height > rectTwo.y) {
+        return false;
+    }
+    
+    // Check whether there is a collision on the x and y
+    return Math.abs((rectOne.x + rectOne.width / 2) - (rectTwo.x + rectTwo.width / 2)) < rectOne.width / 2 + rectTwo.width / 2 && Math.abs((rectOne.y + rectOne.height / 2) - (rectTwo.y + rectTwo.height / 2)) < rectOne.height / 2 + rectTwo.height / 2;
+    
+}
+
+// Check for collision between two rectangles
+function jumpCollision(rectOne, rectTwo) {
+    
+    // Check whether the previous y location is greater than the top of the platform
+    if (prevY < rectTwo.y + gridSquareSizeY) {
         return false;
     }
     
