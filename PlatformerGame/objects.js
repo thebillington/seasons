@@ -38,18 +38,46 @@ function makeTree(x, y, height, type) {
     
 }
 
-// Function to create a puddle
-
+// Function to create water
 function makeWater(x, y, length, height, type) {
         
-        //for the length of the puddle
+        //for the length of the water
         for (var i = 0; i < length; i++) {
-            //and for the height of the puddle
+            //and for the height of the water
             for(var j = 0; j < height; j++) {
-                //incrementally add pixels to fill the boundries of the puddle object with a blue colour and puddle type
+                //incrementally add gameObjects with appropriate colour and type
                 gameObjects.push(GameObject(x + i , y - j, color(104, 120, 201), "water"+type))
             }
-        }
-        
 
+        }       
+
+}
+
+// Function to create a ground
+function makeGround(x, y, length, height, type) {
+    
+    //for the length of the ground
+    for (var i = 0; i < length; i++) {
+        //and for the height of the ground
+        for(var j = 0; j < height; j++) {
+            //incrementally add gameObjects with appropriate colour and type
+            gameObjects.push(GameObject(x + i , y - j, color(81, 67, 15), "ground"+type))
+        }
+
+    }       
+
+}
+
+function makeRock(x, y, height, type) {
+
+        //for loops to iterate through height of the rock (Square object so height/length are interchangable)
+        for (var i = 0; i < height; i++) {
+            for(var j = 0; j < height; j++) {
+                //incrementally add gameObjects with appropriate colour and type
+                gameObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"+type))
+        }
     }
+}
+
+
+
