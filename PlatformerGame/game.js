@@ -49,7 +49,7 @@ function setup() {
   
     // ground creation:
     makeGround(10, 20, 20, 1, "floor");
-    makeGround(20, 9, 20, 1, "floor");
+    makeGround(20, 11, 20, 1, "floor");
     // tree creation
     makeTree(16,19,4,"evergreen");
     // water creation
