@@ -46,14 +46,16 @@ function setup() {
     
     // Create an empty array to hold the game objects
     gameObjects = [];
-    
-    // Make the ground
-    for (var i = 0; i < 20; i++) {
-        gameObjects.push(GameObject(10+i, 20, color(241, 203, 162), true, "ground"));
-    }
-    
-    // Create a tree
-    makeTree(16, 19, 4, "evergreen");
+  
+    // ground creation:
+    makeGround(10, 20, 20, 1, "floor");
+    makeGround(20, 9, 20, 1, "floor");
+    // tree creation
+    makeTree(16,19,4,"evergreen");
+    // water creation
+    makeWater(20, 19, 10, 2, "lake");
+    // terrarin creation
+    makeRock(10, 19, 2, "boulder");
     
 }
 
