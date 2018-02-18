@@ -70,12 +70,13 @@ function setup() {
     makeGround(10, 20, 20, 1);
     makeGround(20, 9, 20, 1);
     // tree creation
-    makeTree(16,19,4,"evergreen");
+    makeTree(16,19,5, "evergreen");
     // water creation
     makeWater(20, 19, 10, 2);
     // terrarin creation
     makeRock(10, 19, 2);
 
+    //initilise starting world to summer objects
     gameObjects = summerObjects;
     
 }
@@ -105,11 +106,12 @@ function draw() {
     if (keyIsDown(LEFT_ARROW)) {
         playerRect.x-=PLAYER_SPEED;
     }
-
     
 }
 
+// Function to change season based on value of currentSeason
 function changeSeason(currentSeason) {
+    //switch case which changes the current gameObjects array to equal the seasonal objects array
     switch(currentSeason) {
         case(0):
             gameObjects = summerObjects;
@@ -124,6 +126,7 @@ function changeSeason(currentSeason) {
             gameObjects = springObjects;
             break;
     }
+
 }
 
 
@@ -141,14 +144,16 @@ function keyPressed() {
         
     }
 
-    if (KEY_S) {
+    // Check for key press s
+    if (keyCode == KEY_S) {
+        //increase the value of the current season variable to change season
         currentSeason++;
+        //if the current season is equal to winter
         if(currentSeason > 3) {
+            //set the new current season value to summer
             currentSeason = 0;
         }
+        //run the changeSeason function
         changeSeason(currentSeason);
-        
-
-        console.log(currentSeason);
     }
 }
