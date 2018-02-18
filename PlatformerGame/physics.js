@@ -44,6 +44,23 @@ function playerCollision() {
         
         // Check whether the game object is collidable
         if (gameObjects[i].collidable) {
+            
+            // Check whether the player is drowning
+            if (drowning) {
+                
+                // Check if the player has hit the floor of the pond
+                if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+                 
+                    // Reset the location
+                    playerRect.x = 300;
+                    playerRect.y = 50;
+                    
+                    // Set drowning to false
+                    drowning = false;
+                    
+                }
+                
+            }
         
             // If the player collided with the object
             while (fallCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
@@ -53,7 +70,26 @@ function playerCollision() {
 
                 // Set jumped to false
                 jumped = false;
+                
+                // Set the y speed to 0
+                ySpeed = 0;
 
+            }
+            
+        }
+        
+        // Check for water
+        if (gameObjects[i].type == "waterlake") {
+            
+            // Check for a collision
+            if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+            
+                // Set the ySpeed
+                ySpeed = gravity;
+                
+                // Set the drowning flag
+                drowning = true;
+                
             }
             
         }
@@ -69,6 +105,14 @@ function fallCollision(rectOne, rectTwo) {
     if (prevY + rectOne.height > rectTwo.y) {
         return false;
     }
+    
+    // Check whether there is a collision on the x and y
+    return Math.abs((rectOne.x + rectOne.width / 2) - (rectTwo.x + rectTwo.width / 2)) < rectOne.width / 2 + rectTwo.width / 2 && Math.abs((rectOne.y + rectOne.height / 2) - (rectTwo.y + rectTwo.height / 2)) < rectOne.height / 2 + rectTwo.height / 2;
+    
+}
+
+// Function to check for a standard block collision
+function blockCollision(rectOne, rectTwo) {
     
     // Check whether there is a collision on the x and y
     return Math.abs((rectOne.x + rectOne.width / 2) - (rectTwo.x + rectTwo.width / 2)) < rectOne.width / 2 + rectTwo.width / 2 && Math.abs((rectOne.y + rectOne.height / 2) - (rectTwo.y + rectTwo.height / 2)) < rectOne.height / 2 + rectTwo.height / 2;

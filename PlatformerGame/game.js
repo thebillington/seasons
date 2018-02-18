@@ -26,8 +26,11 @@ var springObjects;
 var playerImg;
 var playerRect;
 
+// Store whether the player is drowning
+var drowning;
+
 // Set the player speed
-PLAYER_SPEED = 3;
+PLAYER_SPEED = 1;
 
 // Key codes
 SPACE = 32;
@@ -36,8 +39,11 @@ KEY_S = 83;
 // Load objects in before the game loads
 function preload() {
     
+    // Setup the animation reel
+    setupAnimationReel();
+    
     // Get the sprite image
-    playerImg = loadImage("assets/player.png");
+    playerImg = currentAnimationFrame();
     
 }
 
@@ -50,7 +56,7 @@ function setup() {
     // Set the grid square size
     gridSquareSizeX = cWidth / gridSquaresX;
     gridSquareSizeY = cHeight / gridSquaresY;
-    
+  
     // Get the player rectangle
     playerRect = Rectangle(300, 50, gridSquareSizeX, 2*gridSquareSizeY);
 
@@ -59,21 +65,33 @@ function setup() {
     autumnObjects = [];
     winterObjects = [];
     springObjects = [];
+  
+    // Get the player rectangle and setup player state
+    playerRect = Rectangle(300, 50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
+    drowning = false;
     
     // Create an empty array to hold the game objects
     gameObjects = [];
 
     // Initilise the season to summer
     currentSeason = 0;
-    
-    // ground creation:
+  
+    // Make the ground
     makeGround(10, 20, 20, 1);
     makeGround(20, 9, 20, 1);
+    makeGround(10, 20, 10, 1, "floor");
+    makeGround(10, 21, 10, 1, "floor");
+    makeGround(10, 22, 23, 1, "floor");
+    makeGround(30, 21, 6, 1, "floor");
+    makeGround(30, 20, 6, 1, "floor");
+    makeGround(30, 22, 6, 1, "floor");
+    makeGround(19, 11, 20, 1, "floor");
+  
     // tree creation
-    makeTree(16,19,5, "evergreen");
+    makeTree(16,19,5);
     // water creation
-    makeWater(20, 19, 10, 2);
-    // terrarin creation
+    makeWater(20, 21, 10, 2);
+    // terrain creation
     makeRock(10, 19, 2);
 
     //initilise starting world to summer objects
@@ -87,11 +105,14 @@ function draw() {
     // Clear the canvas
     clear();
     
+    // Get the sprite image
+    playerImg = currentAnimationFrame();
+    
     // Physics update
     physics();
     
     // Draw the grid
-    drawGrid();
+    //drawGrid();
         
     // Draw all of the game objects
     drawGameObjects();
@@ -100,11 +121,31 @@ function draw() {
     drawPlayer();
     
     // Check key presses
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (drowning) {
+        changeAnimationFrames("drown");
+    }
+    else if (keyIsDown(RIGHT_ARROW)) {
+        // Check whether we are jumping
+        if (jumped) {
+            changeAnimationFrames("rJump");
+        }
+        else {
+            changeAnimationFrames("rWalk");
+        }
         playerRect.x+=PLAYER_SPEED;
     }
-    if (keyIsDown(LEFT_ARROW)) {
+    else if (keyIsDown(LEFT_ARROW)) {
+        // Check whether we are jumping
+        if (jumped) {
+            changeAnimationFrames("lJump");
+        }
+        else {
+            changeAnimationFrames("lWalk");
+        }
         playerRect.x-=PLAYER_SPEED;
+    }
+    else {
+        changeAnimationFrames("still");
     }
     
 }

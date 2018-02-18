@@ -100,11 +100,17 @@ function makeGround(x, y, length, height) {
 
 }
 
+// Function to create a rock
 function makeRock(x, y, height) {
 
         //for loops to iterate through height of the rock (Square object so height/length are interchangable)
         for (var i = 0; i < height; i++) {
             for(var j = 0; j < height; j++) {
+                // Check whether this rock should be collidable
+                var c = false;
+                if (j == height - 1) {
+                    c = true;
+                }
                 //incrementally add gameObjects with appropriate colour and type
                 summerObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"))
                 autumnObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"))
