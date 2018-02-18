@@ -53,6 +53,9 @@ function playerCollision() {
 
                 // Set jumped to false
                 jumped = false;
+                
+                // Set the y speed to 0
+                ySpeed = 0;
 
             }
             

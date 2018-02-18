@@ -18,7 +18,7 @@ var playerImg;
 var playerRect;
 
 // Set the player speed
-PLAYER_SPEED = 3;
+PLAYER_SPEED = 1;
 
 // Key codes
 SPACE = 32;
@@ -26,8 +26,11 @@ SPACE = 32;
 // Load objects in before the game loads
 function preload() {
     
+    // Setup the animation reel
+    setupAnimationReel();
+    
     // Get the sprite image
-    playerImg = loadImage("assets/player.png");
+    playerImg = currentAnimationFrame();
     
 }
 
@@ -42,7 +45,7 @@ function setup() {
     gridSquareSizeY = cHeight / gridSquaresY;
     
     // Get the player rectangle
-    playerRect = Rectangle(300, 50, gridSquareSizeX, 2*gridSquareSizeY);
+    playerRect = Rectangle(300, 50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
     
     // Create an empty array to hold the game objects
     gameObjects = [];
@@ -65,11 +68,14 @@ function draw() {
     // Clear the canvas
     clear();
     
+    // Get the sprite image
+    playerImg = currentAnimationFrame();
+    
     // Physics update
     physics();
     
     // Draw the grid
-    drawGrid();
+    //drawGrid();
         
     // Draw all of the game objects
     drawGameObjects();
@@ -80,9 +86,14 @@ function draw() {
     // Check key presses
     if (keyIsDown(RIGHT_ARROW)) {
         playerRect.x+=PLAYER_SPEED;
+        changeAnimationFrames("rWalk");
     }
-    if (keyIsDown(LEFT_ARROW)) {
+    else if (keyIsDown(LEFT_ARROW)) {
         playerRect.x-=PLAYER_SPEED;
+        changeAnimationFrames("lWalk");
+    }
+    else {
+        changeAnimationFrames("still");
     }
     
 }
