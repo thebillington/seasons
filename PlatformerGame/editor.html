@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html style="overflow:hidden;">
+    <head>
+        <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+        <style> body {padding: 0; margin: 0;} </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+        <script src="editorObjects.js"></script>
+        <script src="renderer.js"></script>
+        <script src="levelEditor.js"></script>
+        <style>canvas {border: 2px solid black;}</style>
+    </head>
+    <body style="overflow:hidden; margin: 0; display: flex; justify-content: center; align-items: center; padding-top: 5%;">
+        <div style="border:2px solid black; position: fixed; bottom:10px; padding: 5px; height: 100px; overflow-y: scroll; text-align: center;">
+            <p>Ground: (width)<input type="text" id="gWidth"> (height)<input type="text" id="gHeight"> <button onclick="select('GROUND');">CREATE</button></p>
+            <p>Water: (width)<input type="text" id="wWidth"> (height)<input type="text" id="wHeight"> <button onclick="select('WATER');">CREATE</button></p>
+            <p>Rock: (width)<input type="text" id="rWidth"> <button onclick="select('ROCK');">CREATE</button></p>
+            <p>Tree: (height)<input type="text" id="tHeight"> <button onclick="select('TREE');">CREATE</button></p>
+        </div>
+    </body>
+</html>
