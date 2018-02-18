@@ -52,8 +52,8 @@ function makeTree(x, y, height) {
             // Create smaller leaf section for spring objects
             for(var k = 0; k < height - 2; k++) {
                 springObjects.push(GameObject(x-1, y-height-k+1, color(50,230,90), true, "leaf"));
-                springObjects.push(GameObject(x, y-height-k, color(50,230,90), true, "leaf"))
-                springObjects.push(GameObject(x+1, y-height-k+1, color(50,230,90), true, "leaf"))
+                springObjects.push(GameObject(x, y-height-k, color(50,230,90), true, "leaf"));
+                springObjects.push(GameObject(x+1, y-height-k+1, color(50,230,90), true, "leaf"));
             }
 
             
@@ -70,9 +70,9 @@ function makeWater(x, y, length, height) {
             //and for the height of the water
             for(var j = 0; j < height; j++) {
                 //incrementally add gameObjects with appropriate colour and type
-                autumnObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"))
-                winterObjects.push(GameObject(x + i , y - j, color(165, 242, 243), true, "ice"))
-                springObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"))
+                autumnObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"));
+                winterObjects.push(GameObject(x + i , y - j, color(165, 242, 243), true, "ice"));
+                springObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"));
             }
         }
         
@@ -91,10 +91,10 @@ function makeGround(x, y, length, height) {
                 c = true;
             }
             //incrementally add gameObjects with appropriate colour and type
-            summerObjects.push(GameObject(x + i , y - j, color(133,178,76), c, "summerground"))
-            autumnObjects.push(GameObject(x + i , y - j, color(81, 67, 15), c, "autumnground"))
-            winterObjects.push(GameObject(x + i , y - j, color(150, 168, 152), c, "winterground"))
-            springObjects.push(GameObject(x + i , y - j, color(96,128,56), c, "springground"))
+            summerObjects.push(GameObject(x + i , y - j, color(133,178,76), c, "ground"));
+            autumnObjects.push(GameObject(x + i , y - j, color(81, 67, 15), c, "ground"));
+            winterObjects.push(GameObject(x + i , y - j, color(150, 168, 152), c, "ground"));
+            springObjects.push(GameObject(x + i , y - j, color(96,128,56), c, "ground"));
         }
 
     }       
@@ -113,10 +113,10 @@ function makeRock(x, y, height) {
                     c = true;
                 }
                 //incrementally add gameObjects with appropriate colour and type
-                summerObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
-                autumnObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
-                winterObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
-                springObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
+                summerObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"));
+                autumnObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"));
+                winterObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"));
+                springObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"));
         }
     }
 }

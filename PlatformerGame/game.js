@@ -80,7 +80,7 @@ function setup() {
     makeGround(10, 21, 10, 2);
     makeGround(10, 22, 26, 1);
     makeGround(20, 22, 10, 1);
-    makeGround(30, 21, 6, 1);
+    makeGround(30, 21, 6, 2);
     makeGround(19, 11, 20, 1);
   
     // tree creation

@@ -4,7 +4,8 @@ var ySpeed = 0;
 var fallSpeed = 2;
 var jumpSpeed = -2;
 var jumped = false;
-var prevY = 300;
+var prevX = 0;
+var prevY = 0;
 
 // Physics update
 function physics() {
@@ -12,7 +13,8 @@ function physics() {
     // Check gravity
     testGravity();
     
-    // Store the previous y location
+    // Store the previous locations
+    prevX = playerRect.x;
     prevY = playerRect.y;
     
     // Move the player by fall speed
@@ -94,6 +96,34 @@ function playerCollision() {
             
         }
         
+        // If the game object is ground
+        if (gameObjects[i].type == "ground") {
+            
+            // Check for side collision
+            checkSideCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY});
+            
+        }
+        
+    }
+    
+}
+
+// Check for side collision
+function checkSideCollision(rectOne, rectTwo) {
+    
+    //console.log(prevX);
+    
+    // Check whether the previous y location is greater than the top of the platform
+    if (prevX - rectOne.width > rectTwo.x) {
+        while (blockCollision(rectOne, rectTwo)) {
+            rectOne.x += 0.7;
+        }
+    }
+    // Check whether the previous y location is greater than the top of the platform
+    if (prevX + rectOne.width < rectTwo.x + gridSquareSizeX) {
+        while (blockCollision(rectOne, rectTwo)) {
+            rectOne.x -= 0.7;
+        }
     }
     
 }
