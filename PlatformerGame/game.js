@@ -42,15 +42,18 @@ function setup() {
     gridSquareSizeY = cHeight / gridSquaresY;
     
     // Get the player rectangle
-    playerRect = Rectangle(300, 300, gridSquareSizeX, 2*gridSquareSizeY);
+    playerRect = Rectangle(300, 50, gridSquareSizeX, 2*gridSquareSizeY);
     
     // Create an empty array to hold the game objects
     gameObjects = [];
     
     // Make the ground
     for (var i = 0; i < 20; i++) {
-        gameObjects.push(GameObject(10+i, 20, color(81, 67, 15), "ground"));
+        gameObjects.push(GameObject(10+i, 20, color(241, 203, 162), true, "ground"));
     }
+    
+    // Create a tree
+    makeTree(16, 19, 4, "evergreen");
     
 }
 
