@@ -29,10 +29,10 @@ function makeTree(x, y, height) {
         }
         
         // Add the trunk game objects
-        summerObjects.push(GameObject(x, y - i, color(83, 53, 10), tC, "trunk"));
-        autumnObjects.push(GameObject(x, y - i, color(83, 53, 10), tC, "trunk"));
-        winterObjects.push(GameObject(x, y - i, color(83, 53, 10), tC, "trunk "));
-        springObjects.push(GameObject(x, y - i, color(83, 53, 10), tC, "trunk"));
+        summerObjects.push(GameObject(x, y - i, color(160, 82, 45), tC, "trunk"));
+        autumnObjects.push(GameObject(x, y - i, color(160, 82, 45), tC, "trunk"));
+        winterObjects.push(GameObject(x, y - i, color(160, 82, 45), tC, "trunk "));
+        springObjects.push(GameObject(x, y - i, color(160, 82, 45), tC, "trunk"));
         
         // Make the leaves
         for (var j = i; j < height; j++) {
@@ -48,9 +48,6 @@ function makeTree(x, y, height) {
                 autumnObjects.push(GameObject(x-j+height-1,y-i, color(218, 120, 27), true, "fallenleaf"));
 
             }
-            // Change alpha value of leafs to create no leaf effect
-            winterObjects.push(GameObject(x+j-height+1,y-height-i+1, color('rgba(50,230,90, 0)'), false, "noleaf"));
-            winterObjects.push(GameObject(x-j+height-1,y-height-i+1, color('rgba(50,230,90, 0)'), false, "noleaf"));
 
             // Create smaller leaf section for spring objects
             for(var k = 0; k < height - 2; k++) {
@@ -73,7 +70,6 @@ function makeWater(x, y, length, height) {
             //and for the height of the water
             for(var j = 0; j < height; j++) {
                 //incrementally add gameObjects with appropriate colour and type
-                summerObjects.push(GameObject(x + i , y - j, color('rgba(104, 120, 201, 0)'), false, "drywater"))
                 autumnObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"))
                 winterObjects.push(GameObject(x + i , y - j, color(165, 242, 243), true, "ice"))
                 springObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"))
@@ -112,10 +108,10 @@ function makeRock(x, y, height) {
                     c = true;
                 }
                 //incrementally add gameObjects with appropriate colour and type
-                summerObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"))
-                autumnObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"))
-                winterObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"))
-                springObjects.push(GameObject(x + i, y - j, color(90, 77, 65), "rock"))
+                summerObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
+                autumnObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
+                winterObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
+                springObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"))
         }
     }
 }

@@ -77,18 +77,16 @@ function setup() {
     currentSeason = 0;
   
     // Make the ground
-    makeGround(10, 20, 20, 1);
-    makeGround(20, 9, 20, 1);
-    makeGround(10, 20, 10, 1, "floor");
-    makeGround(10, 21, 10, 1, "floor");
-    makeGround(10, 22, 23, 1, "floor");
-    makeGround(30, 21, 6, 1, "floor");
-    makeGround(30, 20, 6, 1, "floor");
-    makeGround(30, 22, 6, 1, "floor");
-    makeGround(19, 11, 20, 1, "floor");
+    makeGround(10, 20, 10, 1);
+    makeGround(10, 21, 10, 1);
+    makeGround(10, 22, 23, 1);
+    makeGround(30, 21, 6, 1);
+    makeGround(30, 20, 6, 1);
+    makeGround(30, 22, 6, 1);
+    makeGround(19, 11, 20, 1);
   
     // tree creation
-    makeTree(16,19,5);
+    makeTree(16,19,4);
     // water creation
     makeWater(20, 21, 10, 2);
     // terrain creation
@@ -186,7 +184,7 @@ function keyPressed() {
     }
 
     // Check for key press s
-    if (keyCode == KEY_S) {
+    if (keyCode == KEY_S && !drowning) {
         //increase the value of the current season variable to change season
         currentSeason++;
         //if the current season is equal to winter

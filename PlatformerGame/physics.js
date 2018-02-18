@@ -79,7 +79,7 @@ function playerCollision() {
         }
         
         // Check for water
-        if (gameObjects[i].type == "waterlake") {
+        if (gameObjects[i].type == "water") {
             
             // Check for a collision
             if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
