@@ -1,8 +1,8 @@
 // Setup gravity
-var gravity = 0.1;
+var gravity = 0.07;
 var ySpeed = 0;
-var fallSpeed = 3;
-var jumpSpeed = -3;
+var fallSpeed = 2;
+var jumpSpeed = -2;
 var jumped = false;
 var prevY = 300;
 

@@ -3,8 +3,8 @@ var cWidth = 800;
 var cHeight = 600;
 
 // Store the number of squares to hold in our grid
-var gridSquaresX = 40;
-var gridSquaresY = 30;
+var gridSquaresX = 60;
+var gridSquaresY = 50;
 
 // Store the width of each grid square
 var gridSquareSizeX;
@@ -30,7 +30,7 @@ var playerRect;
 var drowning;
 
 // Set the player speed
-PLAYER_SPEED = 1;
+PLAYER_SPEED = 0.7;
 
 // Key codes
 SPACE = 32;
