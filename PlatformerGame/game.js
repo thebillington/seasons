@@ -42,11 +42,11 @@ function setup() {
     gridSquareSizeY = cHeight / gridSquaresY;
     
     // Get the player rectangle
-    playerRect = Rectangle(300, 300, gridSquareSizeX, 2*gridSquareSizeY);
+    playerRect = Rectangle(300, 50, gridSquareSizeX, 2*gridSquareSizeY);
     
     // Create an empty array to hold the game objects
     gameObjects = [];
-    
+  
     // ground creation:
     makeGround(10, 20, 20, 1, "floor");
     makeGround(20, 9, 20, 1, "floor");

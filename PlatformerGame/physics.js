@@ -4,12 +4,16 @@ var ySpeed = 0;
 var fallSpeed = 3;
 var jumpSpeed = -3;
 var jumped = false;
+var prevY = 300;
 
 // Physics update
 function physics() {
     
     // Check gravity
     testGravity();
+    
+    // Store the previous y location
+    prevY = playerRect.y;
     
     // Move the player by fall speed
     playerRect.y += ySpeed;
@@ -38,14 +42,19 @@ function playerCollision() {
     // Look at each game object
     for (var i = 0; i < gameObjects.length; i++) {
         
-        // If the player collided with the object
-        while (rectCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+        // Check whether the game object is collidable
+        if (gameObjects[i].collidable) {
         
-            // Move the player up until they aren't colliding
-            playerRect.y -= gravity;
-            
-            // Set jumped to false
-            jumped = false;
+            // If the player collided with the object
+            while (fallCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+
+                // Move the player up until they aren't colliding
+                playerRect.y -= gravity;
+
+                // Set jumped to false
+                jumped = false;
+
+            }
             
         }
         
@@ -54,7 +63,12 @@ function playerCollision() {
 }
 
 // Check for collision between two rectangles
-function rectCollision(rectOne, rectTwo) {
+function fallCollision(rectOne, rectTwo) {
+    
+    // Check whether the previous y location is greater than the top of the platform
+    if (prevY + rectOne.height > rectTwo.y) {
+        return false;
+    }
     
     // Check whether there is a collision on the x and y
     return Math.abs((rectOne.x + rectOne.width / 2) - (rectTwo.x + rectTwo.width / 2)) < rectOne.width / 2 + rectTwo.width / 2 && Math.abs((rectOne.y + rectOne.height / 2) - (rectTwo.y + rectTwo.height / 2)) < rectOne.height / 2 + rectTwo.height / 2;
