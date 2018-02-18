@@ -17,6 +17,9 @@ var gameObjects;
 var playerImg;
 var playerRect;
 
+// Store whether the player is drowning
+var drowning;
+
 // Set the player speed
 PLAYER_SPEED = 1;
 
@@ -44,19 +47,25 @@ function setup() {
     gridSquareSizeX = cWidth / gridSquaresX;
     gridSquareSizeY = cHeight / gridSquaresY;
     
-    // Get the player rectangle
+    // Get the player rectangle and setup player state
     playerRect = Rectangle(300, 50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
+    drowning = false;
     
     // Create an empty array to hold the game objects
     gameObjects = [];
   
     // ground creation:
-    makeGround(10, 20, 20, 1, "floor");
-    makeGround(20, 11, 20, 1, "floor");
+    makeGround(10, 20, 10, 1, "floor");
+    makeGround(10, 21, 10, 1, "floor");
+    makeGround(10, 22, 23, 1, "floor");
+    makeGround(30, 21, 6, 1, "floor");
+    makeGround(30, 20, 6, 1, "floor");
+    makeGround(30, 22, 6, 1, "floor");
+    makeGround(19, 11, 20, 1, "floor");
     // tree creation
     makeTree(16,19,4,"evergreen");
     // water creation
-    makeWater(20, 19, 10, 2, "lake");
+    makeWater(20, 21, 10, 2, "lake");
     // terrarin creation
     makeRock(10, 19, 2, "boulder");
     
@@ -84,13 +93,28 @@ function draw() {
     drawPlayer();
     
     // Check key presses
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (drowning) {
+        changeAnimationFrames("drown");
+    }
+    else if (keyIsDown(RIGHT_ARROW)) {
+        // Check whether we are jumping
+        if (jumped) {
+            changeAnimationFrames("rJump");
+        }
+        else {
+            changeAnimationFrames("rWalk");
+        }
         playerRect.x+=PLAYER_SPEED;
-        changeAnimationFrames("rWalk");
     }
     else if (keyIsDown(LEFT_ARROW)) {
+        // Check whether we are jumping
+        if (jumped) {
+            changeAnimationFrames("lJump");
+        }
+        else {
+            changeAnimationFrames("lWalk");
+        }
         playerRect.x-=PLAYER_SPEED;
-        changeAnimationFrames("lWalk");
     }
     else {
         changeAnimationFrames("still");
