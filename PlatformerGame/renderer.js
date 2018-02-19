@@ -71,3 +71,11 @@ function drawRect(x, y, width, height, colour) {
     quad(x,y, x+ width,y, x + width,y+height, x,y+height)
     
 }
+
+// Function to draw the background
+function renderBackground() {
+    
+    // Draw the autumn background
+    image(backgrounds[currentSeason], 0, 0, cWidth, cHeight)
+    
+}

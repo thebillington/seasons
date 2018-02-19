@@ -107,6 +107,9 @@ function draw() {
     // Clear the canvas
     clear();
     
+    // Draw the background image
+    renderBackground();
+    
     // Get the sprite image
     playerImg = currentAnimationFrame();
     

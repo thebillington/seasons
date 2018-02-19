@@ -180,8 +180,6 @@ function playerCollision() {
 // Check for side collision
 function checkSideCollision(rectOne, rectTwo) {
     
-    //console.log(prevX);
-    
     // Check whether the previous y location is greater than the top of the platform
     if (prevX - rectOne.width > rectTwo.x) {
         while (blockCollision(rectOne, rectTwo)) {

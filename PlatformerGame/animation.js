@@ -12,6 +12,9 @@ var rightJump;
 var still;
 var drown;
 
+// Store the backgrounds
+var background;
+
 // Store the animation tick to tick every few frames
 var animationTick = 0;
 
@@ -31,6 +34,13 @@ function setupAnimationReel() {
     rightJump = [];
     still = [];
     drown = [];
+    
+    // Get the backgrounds
+    backgrounds = [];
+    backgrounds.push(loadImage("assets/summer.png"));
+    backgrounds.push(loadImage("assets/spring.png"));
+    backgrounds.push(loadImage("assets/winter.png"));
+    backgrounds.push(loadImage("assets/autumn.png"));
     
     // Get all of the animations
     for (var i = 1; i < 6; i++) {
