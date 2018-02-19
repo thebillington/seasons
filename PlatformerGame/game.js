@@ -66,6 +66,9 @@ function preload() {
     // Get the key image
     keyImg = loadImage("assets/key.png");
     
+    // Load sounds
+    setupMusic();
+    
 }
 
 // Create the setup function to run before the game is initialized
@@ -111,6 +114,9 @@ function setup() {
   
         // Get the player rectangle and setup player state
         playerRect = Rectangle(-20, -50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
+        
+        // Start the music
+        startMusic();
     }
 
     //initilise starting world to summer objects
