@@ -136,7 +136,8 @@ function openLevel(levelText) {
     }
     
     // Check whether we are in endgame
-    if (nextLevel == "endgame") {
+    if (nextLevel.trim("") == "endgame") {
+        console.log("HERE");
         
         // Set running to false
         endgame = true;

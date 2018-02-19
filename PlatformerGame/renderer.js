@@ -76,7 +76,7 @@ function drawRect(x, y, width, height, colour) {
 function renderBackground() {
     
     // Check if we are in end game
-    if (nextLevel == "endgame") {
+    if (endgame) {
 
         // Draw the background
         image(endGameImg, 0, 0, cWidth, cHeight);
