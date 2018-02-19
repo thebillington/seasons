@@ -299,5 +299,14 @@ function checkPortal() {
         running = true;
 
     }
+}
 
+// Check if the player has fallen off the screen
+function offScreen() {
+    
+    // Check if the y is greater than canvas height
+    if (playerRect.y > cHeight) {
+        
+    }
+    
 }
