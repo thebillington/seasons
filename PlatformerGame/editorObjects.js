@@ -1,8 +1,8 @@
 // Function to return a game element
-function GameElement(_x, _y, _width, _height, _type) {
+function GameElement(_x, _y, _width, _height) {
     
     // Return a game element
-    return {x: _x, y: _y, width: _width, height: _height, type: _type};
+    return {x: _x, y: _y, width: _width, height: _height};
     
 }
 

@@ -184,3 +184,74 @@ function getLevelData() {
     document.execCommand("Copy");
 	
 }
+
+// Function to get the level data
+function setLevelData() {
+	
+	// Load the level data
+	var levelData = document.getElementById("levelData").value.split("\n");
+    
+    // Empty the game objects
+    ground = [];
+    water = [];
+    rocks = [];
+    trees = [];
+	
+	// Check the number of each game elements
+	var noGround = parseInt(levelData[0]);
+	var noWater = parseInt(levelData[1]);
+	var noRocks = parseInt(levelData[2]);
+	var noTrees = parseInt(levelData[3]);
+    
+    // Fetch the ground
+    for (var i = 4; i < 4 + noGround; i++) {
+        
+        // Split the current line
+        var data = levelData[i].split(" ");
+        
+        // Create the ground
+        ground.push(GameElement(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]), parseInt(data[3])));
+        
+    }
+    
+    // Fetch the water
+    for (var i = 4 + noGround; i < 4 + noGround + noWater; i++) {
+        
+        // Split the current line
+        var data = levelData[i].split(" ");
+        
+        // Create the ground
+        water.push(GameElement(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]), parseInt(data[3])));
+        
+    }
+    
+    // Fetch the rocks
+    for (var i = 4 + noGround + noWater; i < 4 + noGround + noWater + noRocks; i++) {
+        
+        // Split the current line
+        var data = levelData[i].split(" ");
+        
+        // Create the ground
+        rocks.push(GameElement(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]), -1));
+        
+    }
+    
+    // Fetch the trees
+    for (var i = 4 + noGround + noWater + noRocks; i < 4 + noGround + noWater + noRocks + noTrees; i++) {
+        
+        // Split the current line
+        var data = levelData[i].split(" ");
+        
+        console.log(data);
+        
+        // Create the ground
+        trees.push(GameElement(parseInt(data[0]), parseInt(data[1]), -1, parseInt(data[2])));
+        
+    }
+    
+    console.log(trees);
+    
+    // Rebuild the game objects
+    makeGameObjects();
+	
+}
