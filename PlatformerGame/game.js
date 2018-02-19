@@ -99,6 +99,9 @@ function setup() {
     //initilise starting world to summer objects
     gameObjects = summerObjects;
     
+    // Reset the physics
+    resetPhys();
+    
 }
 
 // Create the draw function to house our update code
@@ -180,15 +183,19 @@ function changeSeason(currentSeason) {
     switch(currentSeason) {
         case(0):
             gameObjects = summerObjects;
+            document.getElementById('main').style.backgroundColor = "#FBF4E1";
             break;
         case (1):
             gameObjects = autumnObjects;
+            document.getElementById('main').style.backgroundColor = "#F59A44";
             break;
         case (2):
             gameObjects = winterObjects;
+            document.getElementById('main').style.backgroundColor = "#D0E2F2";
             break;
         case (3):
             gameObjects = springObjects;
+            document.getElementById('main').style.backgroundColor = "#98FB98";
             break;
     }
 

@@ -1,13 +1,26 @@
 // Setup physics
 var gravity = 0.07;
-var xSpeed = 0;
-var ySpeed = 0;
+var xSpeed;
+var ySpeed;
 var fallSpeed = 2;
 var jumpSpeed = -2;
-var jumped = false;
-var prevX = 0;
-var prevY = 0;
-var onIce = false;
+var jumped;
+var prevX;
+var prevY;
+var onIce;
+
+// Function toi reset the physics
+function resetPhys() {
+    
+    // Reset key variables
+    xSpeed = 0;
+    ySpeed = 0;
+    jumped = false;
+    prevX = 0;
+    prevY = 0;
+    onIce = false;
+    
+}
 
 // Physics update
 function physics() {
@@ -63,16 +76,15 @@ function playerCollision() {
                 
                 // Check if the player has hit the floor of the pond
                 if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
-                 
-                    // Reset the location
-                    playerRect.x = 300;
-                    playerRect.y = 50;
                     
-                    // Set drowning to false
-                    drowning = false;
+                    // Reset
+                    setup();
                     
-                    // Set on ice to false
-                    onIce = false;
+                    // Reload the level
+                    loadLevel(currentLevel);
+                    
+                    // Exit function
+                    return;
                     
                 }
                 
@@ -255,9 +267,12 @@ function checkPortal() {
 
     // Check whether the player has collided with the portal and all keys are collected
     if(blockCollision(playerRect, goalRect) && keysCollected) {
+                    
+        // Reset
+        setup();
 
-        // Go to the next level
-        loadLevel(nextLevel);
+        // Reload the level
+        loadLevel(currentLevel);
 
     }
 

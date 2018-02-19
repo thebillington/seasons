@@ -13,7 +13,7 @@ var still;
 var drown;
 
 // Store the backgrounds
-var background;
+var backgrounds;
 
 // Store the animation tick to tick every few frames
 var animationTick = 0;

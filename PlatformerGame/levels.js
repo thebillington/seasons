@@ -1,8 +1,14 @@
 // Store the next level file
 var nextLevel;
 
+// Store the current level
+var currentLevel;
+
 //Create a function to load in from file
 function loadLevel(levelName) {
+    
+    // Store the current level
+    currentLevel = levelName;
     
     //First create a http request and fetch the file
     var client = new XMLHttpRequest();
