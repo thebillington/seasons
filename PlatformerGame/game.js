@@ -111,7 +111,7 @@ function setup() {
         running = true;
         
         // Load the level
-        loadLevel("tutorialFive.txt");
+        loadLevel("tutorialSix.txt");
         firstLoad = false;
 
         // Initilise the goal rectangle
