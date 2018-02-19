@@ -68,15 +68,23 @@ function drawRect(x, y, width, height, colour) {
     fill(colour);
     
     // Draw the rect
-    quad(x,y, x+ width,y, x + width,y+height, x,y+height)
+    quad(x,y, x+ width,y, x + width,y+height, x,y+height);
     
 }
 
 // Function to draw the background
 function renderBackground() {
     
-    // Draw the autumn background
-    image(backgrounds[currentSeason], 0, 0, cWidth, cHeight)
+    // Check if we are in end game
+    if (nextLevel == "endgame") {
+
+        // Draw the background
+        image(endGameImg, 0, 0, cWidth, cHeight);
+        return;
+    }
+    
+    // Draw the background
+    image(backgrounds[currentSeason], 0, 0, cWidth, cHeight);
     
 }
 

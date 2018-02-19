@@ -12,6 +12,9 @@ var rightJump;
 var still;
 var drown;
 
+// Get the end game image
+var endGameImg;
+
 // Get the instructions
 var instructions;
 
@@ -47,6 +50,9 @@ function setupAnimationReel() {
     
     // Get the instructions
     instructions = loadImage("assets/instructions.png");
+    
+    // Get the end game image
+    endGameImg = loadImage("assets/winner.png");
     
     // Get all of the animations
     for (var i = 1; i < 6; i++) {
