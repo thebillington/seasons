@@ -40,22 +40,26 @@ function loadLevel(levelName) {
 function openLevel(levelText) {
 	
 	// Load the level data
-	var levelData = levelText.split("\n");
+    var levelData = levelText.split("\n");
+    
+    // Set the number of set variables
+    var setVars = 11;
 	
 	// Check the number of each game elements
     nextLevel = levelData[0];
-    playerRect.x = parseInt(levelData[1]) * gridSquareSizeX;
-    playerRect.y = parseInt(levelData[2]) * gridSquareSizeY;
-    goalRect.x = (parseInt(levelData[3]) - 2) * gridSquareSizeX;
-    goalRect.y = (parseInt(levelData[4]) - 2) * gridSquareSizeY;
-    var noKeys = parseInt(levelData[5]);
-	var noGround = parseInt(levelData[6]);
-	var noWater = parseInt(levelData[7]);
-	var noRocks = parseInt(levelData[8]);
-	var noTrees = parseInt(levelData[9]);
+    currentSeason = parseInt(levelData[1]);
+    playerRect.x = parseInt(levelData[2]) * gridSquareSizeX;
+    playerRect.y = parseInt(levelData[3]) * gridSquareSizeY;
+    goalRect.x = (parseInt(levelData[4]) - 2) * gridSquareSizeX;
+    goalRect.y = (parseInt(levelData[5]) - 2) * gridSquareSizeY;
+    var noKeys = parseInt(levelData[6]);
+	var noGround = parseInt(levelData[7]);
+	var noWater = parseInt(levelData[8]);
+	var noRocks = parseInt(levelData[9]);
+	var noTrees = parseInt(levelData[10]);
     
     // Fetch the keys
-    for (var i = 10; i < 10 + noKeys; i++) {
+    for (var i = setVars; i < setVars + noKeys; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -66,7 +70,7 @@ function openLevel(levelText) {
     }
     
     // Fetch the ground
-    for (var i = 10 + noKeys; i < 10 + noKeys + noGround; i++) {
+    for (var i = setVars + noKeys; i < setVars + noKeys + noGround; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -77,7 +81,7 @@ function openLevel(levelText) {
     }
     
     // Fetch the water
-    for (var i = 10 + noKeys + noGround; i < 10 + noKeys + noGround + noWater; i++) {
+    for (var i = setVars + noKeys + noGround; i < setVars + noKeys + noGround + noWater; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -88,7 +92,7 @@ function openLevel(levelText) {
     }
     
     // Fetch the water
-    for (var i = 10 + noKeys + noGround + noWater; i < 10 + noKeys + noGround + noWater + noRocks; i++) {
+    for (var i = setVars + noKeys + noGround + noWater; i < setVars + noKeys + noGround + noWater + noRocks; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -99,7 +103,7 @@ function openLevel(levelText) {
     }
     
     // Fetch the water
-    for (var i = 10 + noKeys + noGround + noWater + noRocks; i < 10 + noKeys + noGround + noWater + noRocks + noTrees; i++) {
+    for (var i = setVars + noKeys + noGround + noWater + noRocks; i < setVars + noKeys + noGround + noWater + noRocks + noTrees; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -113,5 +117,21 @@ function openLevel(levelText) {
     tutorial = false;
     if (currentLevel.indexOf("tutorial") != -1) {
         tutorial = true;
+    }
+
+    // Set the game objects
+    switch(currentSeason) {
+        case 0:
+            gameObjects = summerObjects;
+            break;
+        case 1:
+            gameObjects = autumnObjects;
+            break;
+        case 2:
+            gameObjects = winterObjects;
+            break;
+        case 3:
+            gameObjects = springObjects;
+            break;
     }
 }
