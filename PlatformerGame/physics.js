@@ -172,7 +172,7 @@ function playerCollision() {
         }
         
         // If the game object is ground or ice
-        if ((gameObjects[i].type == "ground" || gameObjects[i].type == "ice") || gameObjects[i].type == "rock") {
+        if (((gameObjects[i].type == "ground" || gameObjects[i].type == "ice") || gameObjects[i].type == "rock") && !onIce) {
             
             // Check for side collision
             checkSideCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY});
