@@ -111,7 +111,7 @@ function setup() {
         running = true;
         
         // Load the level
-        loadLevel("endgame.txt");
+        loadLevel("tutorialOne.txt");
         firstLoad = false;
 
         // Initilise the goal rectangle
@@ -176,7 +176,6 @@ function draw() {
         
         // Check whether we are in end game
         if (!endgame) {
-            console.log("HERE1");
     
             // Check key presses
             if (drowning) {
