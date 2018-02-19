@@ -28,45 +28,37 @@ function makeGameObjects() {
     // Clear the game objects
     gameObjects = [];
     
-    // For each element
-    for (var i = 0; i < gameElements.length; i++) {
-        
-        // Create a switch case to make the right element
-        switch(gameElements[i].type) {
+    // For each game element
+    for (var i = 0; i < ground.length; i++) {
 
-            case "GROUND":
-
-                // Make ground
-                makeGround(gameElements[i].x, gameElements[i].y, gameElements[i].width, gameElements[i].height);
-                break;
-
-            case "WATER":
-
-                // Make water
-                makeWater(gameElements[i].x, gameElements[i].y, gameElements[i].width, gameElements[i].height);
-                break;
-
-            case "ROCK":
-
-                // Make rock
-                makeRock(gameElements[i].x, gameElements[i].y, gameElements[i].width);
-                break;
-
-            case "TREE":
-                console.log("TREE");
-                // Make tree
-                makeTree(gameElements[i].x, gameElements[i].y, gameElements[i].height);
-                break;
-        }
+        // Make ground
+        makeGround(ground[i].x, ground[i].y, ground[i].width, ground[i].height);
         
     }
+    for (var i = 0; i < water.length; i++) {
+
+        // Make water
+        makeWater(water[i].x, water[i].y, water[i].width, water[i].height);
+        
+    }
+    for (var i = 0; i < rocks.length; i++) {
+
+        // Make rock
+        makeRock(rocks[i].x, rocks[i].y, rocks[i].width);
+        
+    }
+    for (var i = 0; i < trees.length; i++) {
+
+        // Make ground
+        makeTree(trees[i].x, trees[i].y, trees[i].height);
+        
+    }
+             
     
 }
 
 // Function to create a tree
 function makeTree(x, y, height) {
-    
-    console.log("TREE");
     
     // Create the trunk and leaves
     for (var i = 0; i < height; i++) {
@@ -139,8 +131,8 @@ function makeRock(x, y, height) {
                 if (j == height - 1) {
                     c = true;
                 }
-                //incrementally add gameObjects with appropriate colour and type
-                gameObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"));
+            //incrementally add gameObjects with appropriate colour and type
+            gameObjects.push(GameObject(x + i, y - j, color(169, 169, 169), c, "rock"));
         }
     }
 }

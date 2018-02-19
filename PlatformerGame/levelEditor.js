@@ -20,7 +20,10 @@ var currentObject;
 var creationSelection = "GROUND";
 
 // Variable to hold game elements
-var gameElements;
+var ground;
+var water;
+var rocks;
+var trees;
 
 // Create the setup function to run before the game is initialized
 function setup() {
@@ -35,8 +38,11 @@ function setup() {
     // Create an empty array to hold the game objects
     gameObjects = [];
     
-    // Create game elements array
-    gameElements = [];
+    // Create game elements arrays
+    ground = [];
+    water = [];
+    rocks = [];
+    trees = [];
     
     // Set the current object to -1
     currentObject = -1;
@@ -87,25 +93,26 @@ function mouseReleased() {
                     case "GROUND":
                 
                         // Add some ground
-                        gameElements.push(GameElement(x, y, parseInt(document.getElementById('gWidth').value), parseInt(document.getElementById('gHeight').value), creationSelection));
+                        ground.push(GameElement(x, y, parseInt(document.getElementById('gWidth').value), parseInt(document.getElementById('gHeight').value)));
                         break;
 
                     case "WATER":
 
                         // Add water
-                        gameElements.push(GameElement(x, y, parseInt(document.getElementById('wWidth').value), parseInt(document.getElementById('wHeight').value), creationSelection));
+                        water.push(GameElement(x, y, parseInt(document.getElementById('wWidth').value), parseInt(document.getElementById('wHeight').value)));
                         break;
 
                     case "ROCK":
 
                         // Add rock
-                        gameElements.push(GameElement(x, y, parseInt(document.getElementById('rWidth').value), -1, creationSelection));
+                        rocks.push(GameElement(x, y, parseInt(document.getElementById('rWidth').value), -1));
                         break;
 
                     case "TREE":
 
                         // Add tree
-                        gameElements.push(GameElement(x, y, -1, parseInt(document.getElementById('tHeight').value), creationSelection));
+                        trees.push(GameElement(x, y, -1, parseInt(document.getElementById('tHeight').value)));
+                        break;
                 }
                 
                 // Rebuild the game objects
@@ -132,46 +139,48 @@ function getLevelData() {
 	
 	// Create an empty string to store the level data
 	var levelData = "";
+    
+    console.log(ground.length);
 	
 	// Get the attribute numbers
-	levelData += packages.length + "\n" + goals.length + "\n" + (walls.length - 88) + "\n" + spawners.length;
-	
-	// Look at each package
-	for (var i = 0; i < packages.length; i++) {
-		
-		// Add the package data
-		levelData += "\n" + packages[i].location.x + " " + packages[i].location.y + " " + packages[i].colour.levels[0] + " " + packages[i].colour.levels[1] + " " + packages[i].colour.levels[2] + " " + packages[i].id;
-		
-	}
-		
-	// Look at each goal
-	for (var i = 0; i < goals.length; i++) {
-		
-		// Add the package data
-		levelData += "\n" + goals[i].location.x + " " + goals[i].location.y + " " + goals[i].colour.levels[0] + " " + goals[i].colour.levels[1] + " " + goals[i].colour.levels[2] + " " + goals[i].id;
-		
-	}
-		
-	// Look at each wall
-	for (var i = 88; i < walls.length; i++) {
-		
-		// Add the package data
-		levelData += "\n" + walls[i].location.x + " " + walls[i].location.y;
-		
-	}
-		
-	// Look at each spawner
-	for (var i = 0; i < spawners.length; i++) {
-		
-		// Add the package data
-		console.log(spawners[i].colour);
-		console.log(spawners[i].colour.levels);
-		levelData += "\n" + spawners[i].location.x + " " + spawners[i].location.y + " " + spawners[i].items + " " + spawners[i].frequency + " " + spawners[i].direction.x + " " + spawners[i].direction.y + " " + spawners[i].colour.levels[0] + " " + spawners[i].colour.levels[1] + " " + spawners[i].colour.levels[2] + " " + spawners[i].id;
-		
-	}
-	
-	// Set the level data as the form data to send to the testLevel script
-	document.getElementById('levelData').value = levelData;
-	document.getElementById('testLevelData').value = levelData;
+	levelData += ground.length + "\n" + water.length + "\n" + rocks.length + "\n" + trees.length + "\n";
+
+    
+    // For each game element
+    for (var i = 0; i < ground.length; i++) {
+
+        // Make ground
+        levelData += ground[i].x + " " + ground[i].y + " " + ground[i].width + " " + ground[i].height + "\n";
+        
+    }
+    for (var i = 0; i < water.length; i++) {
+
+        // Make water
+        levelData += water[i].x + " " + water[i].y + " " + water[i].width + " " + water[i].height + "\n";
+        
+    }
+    for (var i = 0; i < rocks.length; i++) {
+
+        // Make rock
+        levelData += rocks[i].x + " " + rocks[i].y + " " + rocks[i].width + "\n";
+        
+    }
+    for (var i = 0; i < trees.length; i++) {
+
+        // Make ground
+        levelData += trees[i].x + " " + trees[i].y + " " + trees[i].height + "\n";
+        
+    }
+    
+    // Store the text
+    document.getElementById("levelData").value = levelData.trim();
+    
+    console.log(levelData.trim());
+    
+    // Select the level data
+    document.getElementById("levelData").select();
+    
+    // Copy the level data
+    document.execCommand("Copy");
 	
 }
