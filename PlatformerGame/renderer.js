@@ -9,14 +9,16 @@ function drawPlayer() {
 // Function to draw the goal 
 function drawGoal(){
     //Draw the goal on screen
-    drawRect(goalRect.x, goalRect.y, goalRect.width, goalRect.height, color(0));
+    drawRect(goalRect.x, goalRect.y, goalRect.width, goalRect.height, goalRect.colour);
 }
 
 // Function to draw the keys for the goal
 function drawKeys(){
     // Draw the keys on screen
-    for(var i = 0; i < keyRect.length; i++) {
-        image(keyImg, keyRect[i].x, keyRect[i].y, keyRect[i].width, keyRect[i].height);
+    for(var i = 0; i < keyArray.length; i++) {
+        if(keyArray[i].visible) {
+            image(keyImg, keyArray[i].x, keyArray[i].y, keyArray[i].width, keyArray[i].height);
+        }
     }
 }
 

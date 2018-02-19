@@ -17,6 +17,12 @@ function physics() {
     
     // Check if the player has collided with any game objects
     playerCollision();
+
+    // Check for collision with keys
+    checkKeys();
+
+    // Check for collision with the portal
+    checkPortal();
     
     // Store the previous locations
     prevY = playerRect.y;
@@ -223,4 +229,38 @@ function blockCollision(rectOne, rectTwo) {
     // Check whether there is a collision on the x and y
     return Math.abs((rectOne.x + rectOne.width / 2) - (rectTwo.x + rectTwo.width / 2)) < rectOne.width / 2 + rectTwo.width / 2 && Math.abs((rectOne.y + rectOne.height / 2) - (rectTwo.y + rectTwo.height / 2)) < rectOne.height / 2 + rectTwo.height / 2;
     
+}
+
+// Create a function to check whether a key is collected
+function checkKeys() {
+    // Look at each key
+    for (var i = 0; i < keyArray.length; i++) {
+        // Check for collision
+        if (blockCollision(playerRect, keyArray[i])) {
+            // Pick up the key
+            if(keyArray[i].visible) {
+                keyArray[i].visible = false;
+                keyPickedUp += 1;
+            }
+
+            // Check if all the keys are collected
+            if(keyPickedUp == keyArray.length && keyArray.length != 0) {
+                goalRect.colour = color(255);
+                keysCollected = true;
+            }
+        }
+    }
+}
+
+// Create a function to check whether the player has collided with the portal
+function checkPortal() {
+
+    // Check whether the player has collided with the portal and all keys are collected
+    if(blockCollision(playerRect, goalRect) && keysCollected) {
+
+        // Go to the next level
+        loadLevel(nextLevel);
+
+    }
+
 }

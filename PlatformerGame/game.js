@@ -31,7 +31,9 @@ var goalRect;
 
 // Get the key sprite and rectangle
 var keyImg;
-var keyRect;
+var keyArray;
+var keyPickedUp;
+var keysCollected;
 
 // Store whether the player is drowning
 var drowning;
@@ -74,16 +76,16 @@ function setup() {
     springObjects = [];
 
     // Initilise keyRect array
-    keyRect = [];
+    keyArray = [];
+    keyPickedUp = 0;
+    keysCollected = false;
   
     // Get the player rectangle and setup player state
     playerRect = Rectangle(300, 50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
     drowning = false;
+
     // Initilise the goal rectangle
-    goalRect = Rectangle(500, 250, gridSquareSizeX, gridSquareSizeY*2);
-    // Initilise the key rectangle
-    keyRect.push(Rectangle(550, 280, gridSquareSizeX* 2, gridSquareSizeY * 2));
-    keyRect.push(Rectangle(600, 310, gridSquareSizeX * 2, gridSquareSizeY * 2));
+    goalRect = Goal(0, 0, gridSquareSizeX, gridSquareSizeY*2, color(0));
     
     // Create an empty array to hold the game objects
     gameObjects = [];
@@ -114,7 +116,7 @@ function draw() {
     // Draw the grid
     //drawGrid();
 
-    // Draw the keys (do before game objects to allow for hiddden keys)
+    // Draw the keys
     drawKeys();
 
     // Draw all of the game objects
@@ -167,7 +169,6 @@ function draw() {
         jumped = true;
         
     }
-    
 }
 
 // Function to change season based on value of currentSeason
@@ -189,7 +190,6 @@ function changeSeason(currentSeason) {
     }
 
 }
-
 
 // Function to check key presses
 function keyPressed() {

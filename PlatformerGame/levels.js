@@ -40,8 +40,8 @@ function openLevel(levelText) {
     nextLevel = levelData[0];
     playerRect.x = parseInt(levelData[1]) * gridSquareSizeX;
     playerRect.y = parseInt(levelData[2]) * gridSquareSizeY;
-    var goalX = parseInt(levelData[3]);
-    var goalY = parseInt(levelData[4]);
+    goalRect.x = (parseInt(levelData[3]) - 2) * gridSquareSizeX;
+    goalRect.y = (parseInt(levelData[4]) - 2) * gridSquareSizeY;
     var noKeys = parseInt(levelData[5]);
 	var noGround = parseInt(levelData[6]);
 	var noWater = parseInt(levelData[7]);
@@ -50,7 +50,13 @@ function openLevel(levelText) {
     
     // Fetch the keys
     for (var i = 10; i < 10 + noKeys; i++) {
-        console.log("KEY");
+        
+        // Split the current line
+        var data = levelData[i].split(" ");
+
+        // Add the key
+        keyArray.push(Key(parseInt(data[0]) * gridSquareSizeX, (parseInt(data[1]) - 2) * gridSquareSizeY, gridSquareSizeX* 2, gridSquareSizeY * 2, true));
+
     }
     
     // Fetch the ground

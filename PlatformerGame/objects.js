@@ -5,6 +5,15 @@ function Rectangle(_x, _y, _width, _height) {
     return {x: _x, y: _y, width: _width, height: _height};
     
 }
+
+// Function to create a key
+function Key(_x, _y, _width, _height, _visible) {
+    return {x: _x, y: _y, width: _width, height: _height, visible: _visible}
+}
+
+function Goal(_x, _y, _width, _height, _colour) {
+    return {x: _x, y: _y, width: _width, height: _height, colour: _colour}
+}
     
 // Function to create a game object
 function GameObject(_x, _y, _colour, _collidable, _type) {
@@ -120,6 +129,7 @@ function makeRock(x, y, height) {
         }
     }
 }
+
 
 
 
