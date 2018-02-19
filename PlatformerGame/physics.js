@@ -76,12 +76,22 @@ function playerCollision() {
                 
                 // Check if the player has hit the floor of the pond
                 if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+        
+                    // Prevent game running
+                    running = false;
+                    
+                    // Move the goal and player off screen
+                    playerRect.x = -20;
+                    goalRect.x = -50;
                     
                     // Reset
                     setup();
                     
                     // Reload the level
                     loadLevel(currentLevel);
+                    
+                    // Restart the game running
+                    running = true;
                     
                     // Exit function
                     return;
@@ -268,6 +278,14 @@ function checkPortal() {
     // Check whether the player has collided with the portal and all keys are collected
     if(blockCollision(playerRect, goalRect) && keysCollected) {
                     
+        // Move the goal and player off screen
+        playerRect.x = -20;
+        goalRect.x = -50;
+                    
+        
+        // Prevent game running
+        running = false;
+                    
         // Reset
         setup();
         
@@ -276,6 +294,9 @@ function checkPortal() {
 
         // Reload the level
         loadLevel(nextLevel);
+        
+        // Restart thew game running
+        running = true;
 
     }
 

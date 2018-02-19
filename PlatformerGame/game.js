@@ -48,6 +48,9 @@ KEY_S = 83;
 // Set first load to false
 var firstLoad = true;
 
+// Store whether the game is runnning
+var running = false;
+
 // Load objects in before the game loads
 function preload() {
     
@@ -93,6 +96,9 @@ function setup() {
     // If this is the first load
     if (firstLoad) {
         
+        // Set running to true
+        running = true;
+        
         // Load the level
         loadLevel("tutorialOne.txt");
         firstLoad = false;
@@ -129,59 +135,62 @@ function draw() {
     
     // Draw the grid
     //drawGrid();
-
-    // Draw the keys
-    drawKeys();
-
-    // Draw all of the game objects
-    drawGameObjects();
     
-    // Draw the player
-    drawPlayer();
+    // Check whether we are running
+    if (running) {
 
-    // Draw the goal
-    drawGoal();
+        // Draw the keys
+        drawKeys();
 
+        // Draw all of the game objects
+        drawGameObjects();
+
+        // Draw the player
+        drawPlayer();
+
+        // Draw the goal
+        drawGoal();
     
-    // Check key presses
-    if (drowning) {
-        changeAnimationFrames("drown");
-    }
-    else if (keyIsDown(RIGHT_ARROW)) {
-        // Check whether we are jumping
-        if (jumped) {
-            changeAnimationFrames("rJump");
+        // Check key presses
+        if (drowning) {
+            changeAnimationFrames("drown");
+        }
+        else if (keyIsDown(RIGHT_ARROW)) {
+            // Check whether we are jumping
+            if (jumped) {
+                changeAnimationFrames("rJump");
+            }
+            else {
+                changeAnimationFrames("rWalk");
+            }
+            prevX = playerRect.x;
+            playerRect.x+=PLAYER_SPEED;
+        }
+        else if (keyIsDown(LEFT_ARROW)) {
+            // Check whether we are jumping
+            if (jumped) {
+                changeAnimationFrames("lJump");
+            }
+            else {
+                changeAnimationFrames("lWalk");
+            }
+            prevX = playerRect.x;
+            playerRect.x-=PLAYER_SPEED;
         }
         else {
-            changeAnimationFrames("rWalk");
+            changeAnimationFrames("still");
         }
-        prevX = playerRect.x;
-        playerRect.x+=PLAYER_SPEED;
-    }
-    else if (keyIsDown(LEFT_ARROW)) {
-        // Check whether we are jumping
-        if (jumped) {
-            changeAnimationFrames("lJump");
+
+        // Check for space bar and not jumped
+        if (keyIsDown(SPACE) && !jumped) {
+
+            // Set the y speed to jump speed
+            ySpeed = jumpSpeed;
+
+            // Set jumped to true
+            jumped = true;
+
         }
-        else {
-            changeAnimationFrames("lWalk");
-        }
-        prevX = playerRect.x;
-        playerRect.x-=PLAYER_SPEED;
-    }
-    else {
-        changeAnimationFrames("still");
-    }
-    
-    // Check for space bar and not jumped
-    if (keyIsDown(SPACE) && !jumped) {
-        
-        // Set the y speed to jump speed
-        ySpeed = jumpSpeed;
-        
-        // Set jumped to true
-        jumped = true;
-        
     }
 }
 
