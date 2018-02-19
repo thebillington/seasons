@@ -57,6 +57,8 @@ var running = false;
 // Load objects in before the game loads
 function preload() {
     
+    document.getElementById('p5_loading').innerHTML = "Getting animations...";
+    
     // Setup the animation reel
     setupAnimationReel();
     

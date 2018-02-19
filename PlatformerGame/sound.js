@@ -6,17 +6,21 @@ var currentSong = 0;
 
 // Function to setup the music
 function setupMusic() {
-
-    console.log("LOADING MUSIC");
     
     // Create an empty array of songs and populate
     songs = [];
     try {
+        document.getElementById('p5_loading').innerHTML = "Getting music tracks (1/6)...";
         songs.push(loadSound("music/bensound-betterdays.mp3"));
+        document.getElementById('p5_loading').innerHTML = "Getting music tracks (2/6)...";
         songs.push(loadSound("music/bensound-memories.mp3"));
+        document.getElementById('p5_loading').innerHTML = "Getting music tracks (3/6)...";
         songs.push(loadSound("music/bensound-ofeliasdream.mp3"));
+        document.getElementById('p5_loading').innerHTML = "Getting music tracks (4/6)...";
         songs.push(loadSound("music/bensound-sadday.mp3"));
+        document.getElementById('p5_loading').innerHTML = "Getting music tracks (5/6)...";
         songs.push(loadSound("music/bensound-slowmotion.mp3"));
+        document.getElementById('p5_loading').innerHTML = "Getting music tracks (6/6)...";
         songs.push(loadSound("music/bensound-tomorrow.mp3"));
     } catch (err) {
         console.log(err.message);
@@ -30,10 +34,18 @@ function startMusic() {
 
     // Check that the songs list isn't empty
     if(songs.length != 0) {
-    
-        // Play the first song
-        songs[currentSong].play();
-        songs[currentSong].onended(nextSong);
+        
+        // Try play the song
+        try {
+
+            // Play the first song
+            songs[currentSong].play();
+            songs[currentSong].onended(nextSong);
+            
+            } catch (err) {
+            console.log(err.message);
+            console.log("Music is not supported on your device! Consider switching to a device that is Web Audio API compatible.");
+        }
 
     }
     
