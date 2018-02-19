@@ -12,6 +12,9 @@ var rightJump;
 var still;
 var drown;
 
+// Get the instructions
+var instructions;
+
 // Store the backgrounds
 var backgrounds;
 
@@ -41,6 +44,9 @@ function setupAnimationReel() {
     backgrounds.push(loadImage("assets/spring.png"));
     backgrounds.push(loadImage("assets/winter.png"));
     backgrounds.push(loadImage("assets/autumn.png"));
+    
+    // Get the instructions
+    instructions = loadImage("assets/instructions.png");
     
     // Get all of the animations
     for (var i = 1; i < 6; i++) {

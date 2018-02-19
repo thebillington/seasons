@@ -35,6 +35,9 @@ var keyArray;
 var keyPickedUp;
 var keysCollected;
 
+// Store whether this level is a tutorial
+var tutorial;
+
 // Store whether the player is drowning
 var drowning;
 
@@ -138,6 +141,12 @@ function draw() {
     
     // Check whether we are running
     if (running) {
+        
+        // Check whether this is a tutorial
+        if (tutorial) {
+            // Draw the instructions
+            renderInstructions();
+        }
 
         // Draw the keys
         drawKeys();

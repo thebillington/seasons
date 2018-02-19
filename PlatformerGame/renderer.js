@@ -79,3 +79,11 @@ function renderBackground() {
     image(backgrounds[currentSeason], 0, 0, cWidth, cHeight)
     
 }
+
+// Function to render instructions
+function renderInstructions() {
+    
+    // Draw the instructions
+    image(instructions, 250, 400);
+    
+}

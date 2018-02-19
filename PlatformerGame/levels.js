@@ -108,4 +108,10 @@ function openLevel(levelText) {
         makeTree(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
         
     } 
+    
+    // Check whether we should draw instructions for this level
+    tutorial = false;
+    if (currentLevel.indexOf("tutorial") != -1) {
+        tutorial = true;
+    }
 }
