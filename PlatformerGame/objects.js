@@ -90,6 +90,8 @@ function makeWater(x, y, length, height) {
 // Function to create a ground
 function makeGround(x, y, length, height) {
     
+    console.log("X: " + x + " Y: " + y + " Width: + " + width + " Height: " + height);
+    
     //for the length of the ground
     for (var i = 0; i < length; i++) {
         //and for the height of the ground
