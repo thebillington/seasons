@@ -6,6 +6,8 @@ var currentSong = 0;
 
 // Function to setup the music
 function setupMusic() {
+
+    console.log("LOADING MUSIC");
     
     // Create an empty array of songs and populate
     songs = [];
@@ -25,10 +27,15 @@ function setupMusic() {
 
 // Function to play music
 function startMusic() {
- 
-    // Play the first song
-    songs[currentSong].play();
-    songs[currentSong].onended(nextSong);
+
+    // Check that the songs list isn't empty
+    if(songs.length != 0) {
+    
+        // Play the first song
+        songs[currentSong].play();
+        songs[currentSong].onended(nextSong);
+
+    }
     
 }
 
