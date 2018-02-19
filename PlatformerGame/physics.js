@@ -270,9 +270,12 @@ function checkPortal() {
                     
         // Reset
         setup();
+        
+        // Reset the goal colour
+        goalRect.colour = color(0);
 
         // Reload the level
-        loadLevel(currentLevel);
+        loadLevel(nextLevel);
 
     }
 

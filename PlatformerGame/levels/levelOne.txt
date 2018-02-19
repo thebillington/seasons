@@ -1,6 +1,6 @@
-levelOne.txt
+tutorialOne.txt
 11
-19
+15
 37
 11
 2

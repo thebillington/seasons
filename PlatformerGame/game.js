@@ -45,6 +45,9 @@ PLAYER_SPEED = 0.7;
 SPACE = 32;
 KEY_S = 83;
 
+// Set first load to false
+var firstLoad = true;
+
 // Load objects in before the game loads
 function preload() {
     
@@ -79,13 +82,7 @@ function setup() {
     keyArray = [];
     keyPickedUp = 0;
     keysCollected = false;
-  
-    // Get the player rectangle and setup player state
-    playerRect = Rectangle(300, 50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
     drowning = false;
-
-    // Initilise the goal rectangle
-    goalRect = Goal(0, 0, gridSquareSizeX, gridSquareSizeY*2, color(0));
     
     // Create an empty array to hold the game objects
     gameObjects = [];
@@ -93,8 +90,19 @@ function setup() {
     // Initilise the season to summer
     currentSeason = 0;
     
-    // Load the level
-    loadLevel("levelOne.txt");
+    // If this is the first load
+    if (firstLoad) {
+        
+        // Load the level
+        loadLevel("tutorialOne.txt");
+        firstLoad = false;
+
+        // Initilise the goal rectangle
+        goalRect = Goal(-50, -50, gridSquareSizeX, gridSquareSizeY*2, color(0));
+  
+        // Get the player rectangle and setup player state
+        playerRect = Rectangle(-20, -50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
+    }
 
     //initilise starting world to summer objects
     gameObjects = summerObjects;
