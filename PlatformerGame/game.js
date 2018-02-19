@@ -72,7 +72,7 @@ function preload() {
     keyImg = loadImage("assets/key.png");
     
     // Load sounds
-    //setupMusic();
+    setupMusic();
     
 }
 
@@ -111,7 +111,7 @@ function setup() {
         running = true;
         
         // Load the level
-        loadLevel("tutorialSix.txt");
+        loadLevel("levelOne.txt");
         firstLoad = false;
 
         // Initilise the goal rectangle
@@ -124,7 +124,7 @@ function setup() {
         endgame = false;
         
         // Start the music
-        // startMusic();
+        startMusic();
     }
 
     //initilise starting world to summer objects
