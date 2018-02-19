@@ -44,6 +44,9 @@ function physics() {
     playerRect.x += xSpeed;
     playerRect.y += ySpeed;
     
+    // Check if the player is off screen
+    offScreen();
+    
 }
 
 // Function to apply gravity
@@ -76,22 +79,9 @@ function playerCollision() {
                 
                 // Check if the player has hit the floor of the pond
                 if (blockCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
-        
-                    // Prevent game running
-                    running = false;
                     
-                    // Move the goal and player off screen
-                    playerRect.x = -20;
-                    goalRect.x = -50;
-                    
-                    // Reset
-                    setup();
-                    
-                    // Reload the level
-                    loadLevel(currentLevel);
-                    
-                    // Restart the game running
-                    running = true;
+                    // Die
+                    die();
                     
                     // Exit function
                     return;
@@ -281,13 +271,15 @@ function checkPortal() {
         // Move the goal and player off screen
         playerRect.x = -20;
         goalRect.x = -50;
-                    
         
         // Prevent game running
         running = false;
                     
         // Reset
         setup();
+        
+        // Set on ice to false
+        onice = false;
         
         // Reset the goal colour
         goalRect.colour = color(0);
@@ -301,12 +293,40 @@ function checkPortal() {
     }
 }
 
+// Function to die
+function die() {
+
+    // Prevent game running
+    running = false;
+
+    // Move the goal and player off screen
+    goalRect.x = -50;
+
+    // Reset the colour of the portal
+    goalRect.colour = color(0);
+
+    // Reset
+    setup();
+
+    // Restart the game running
+    running = true;
+    
+    // Set on ice to false
+    onice = false;
+
+    // Reload the level
+    loadLevel(currentLevel);
+    
+}
+
 // Check if the player has fallen off the screen
 function offScreen() {
     
     // Check if the y is greater than canvas height
     if (playerRect.y > cHeight) {
         
+        // Die
+        die();
     }
     
 }

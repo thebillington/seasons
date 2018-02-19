@@ -50,6 +50,7 @@ function openLevel(levelText) {
     currentSeason = parseInt(levelData[1]);
     playerRect.x = parseInt(levelData[2]) * gridSquareSizeX;
     playerRect.y = parseInt(levelData[3]) * gridSquareSizeY;
+    prevY = playerRect.y - 20;
     goalRect.x = (parseInt(levelData[4]) - 2) * gridSquareSizeX;
     goalRect.y = (parseInt(levelData[5]) - 2) * gridSquareSizeY;
     var noKeys = parseInt(levelData[6]);
@@ -57,6 +58,8 @@ function openLevel(levelText) {
 	var noWater = parseInt(levelData[8]);
 	var noRocks = parseInt(levelData[9]);
 	var noTrees = parseInt(levelData[10]);
+    
+    console.log(playerRect.x);
     
     // Fetch the keys
     for (var i = setVars; i < setVars + noKeys; i++) {

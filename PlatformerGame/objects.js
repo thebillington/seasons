@@ -81,7 +81,10 @@ function makeWater(x, y, length, height) {
                 //incrementally add gameObjects with appropriate colour and type
                 autumnObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"));
                 winterObjects.push(GameObject(x + i , y - j, color(165, 242, 243), true, "ice"));
-                springObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"));
+                // Check if this is the bottom layer
+                if (j == 0) {
+                    springObjects.push(GameObject(x + i , y - j, color(104, 120, 201), false, "water"));
+                }
             }
         }
         
