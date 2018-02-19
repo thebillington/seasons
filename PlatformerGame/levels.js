@@ -134,4 +134,13 @@ function openLevel(levelText) {
             gameObjects = springObjects;
             break;
     }
+    
+    // Check whether we are in endgame
+    if (nextLevel == "endgame") {
+        
+        // Set running to false
+        endgame = true;
+        changeAnimationFrames("still");
+        
+    }
 }

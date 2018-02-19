@@ -35,6 +35,9 @@ var keyArray;
 var keyPickedUp;
 var keysCollected;
 
+// Store whether we are in the end game
+var endgame;
+
 // Store whether this level is a tutorial
 var tutorial;
 
@@ -57,6 +60,8 @@ var running = false;
 // Load objects in before the game loads
 function preload() {
     
+    document.getElementById('p5_loading').innerHTML = "Getting animations...";
+    
     // Setup the animation reel
     setupAnimationReel();
     
@@ -67,7 +72,7 @@ function preload() {
     keyImg = loadImage("assets/key.png");
     
     // Load sounds
-    //setupMusic();
+    setupMusic();
     
 }
 
@@ -106,7 +111,7 @@ function setup() {
         running = true;
         
         // Load the level
-        loadLevel("tutorialFive.txt");
+        loadLevel("levelOne.txt");
         firstLoad = false;
 
         // Initilise the goal rectangle
@@ -115,8 +120,11 @@ function setup() {
         // Get the player rectangle and setup player state
         playerRect = Rectangle(-20, -50, gridSquareSizeX * 0.7, 2*gridSquareSizeY);
         
+        // Set end game to false
+        endgame = false;
+        
         // Start the music
-        //startMusic();
+        startMusic();
     }
 
     //initilise starting world to summer objects
@@ -165,46 +173,50 @@ function draw() {
 
         // Draw the goal
         drawGoal();
+        
+        // Check whether we are in end game
+        if (!endgame) {
     
-        // Check key presses
-        if (drowning) {
-            changeAnimationFrames("drown");
-        }
-        else if (keyIsDown(RIGHT_ARROW)) {
-            // Check whether we are jumping
-            if (jumped) {
-                changeAnimationFrames("rJump");
+            // Check key presses
+            if (drowning) {
+                changeAnimationFrames("drown");
+            }
+            else if (keyIsDown(RIGHT_ARROW)) {
+                // Check whether we are jumping
+                if (jumped) {
+                    changeAnimationFrames("rJump");
+                }
+                else {
+                    changeAnimationFrames("rWalk");
+                }
+                prevX = playerRect.x;
+                playerRect.x+=PLAYER_SPEED;
+            }
+            else if (keyIsDown(LEFT_ARROW)) {
+                // Check whether we are jumping
+                if (jumped) {
+                    changeAnimationFrames("lJump");
+                }
+                else {
+                    changeAnimationFrames("lWalk");
+                }
+                prevX = playerRect.x;
+                playerRect.x-=PLAYER_SPEED;
             }
             else {
-                changeAnimationFrames("rWalk");
+                changeAnimationFrames("still");
             }
-            prevX = playerRect.x;
-            playerRect.x+=PLAYER_SPEED;
-        }
-        else if (keyIsDown(LEFT_ARROW)) {
-            // Check whether we are jumping
-            if (jumped) {
-                changeAnimationFrames("lJump");
+
+            // Check for space bar and not jumped
+            if (keyIsDown(SPACE) && !jumped) {
+
+                // Set the y speed to jump speed
+                ySpeed = jumpSpeed;
+
+                // Set jumped to true
+                jumped = true;
+
             }
-            else {
-                changeAnimationFrames("lWalk");
-            }
-            prevX = playerRect.x;
-            playerRect.x-=PLAYER_SPEED;
-        }
-        else {
-            changeAnimationFrames("still");
-        }
-
-        // Check for space bar and not jumped
-        if (keyIsDown(SPACE) && !jumped) {
-
-            // Set the y speed to jump speed
-            ySpeed = jumpSpeed;
-
-            // Set jumped to true
-            jumped = true;
-
         }
     }
 }
@@ -235,17 +247,21 @@ function changeSeason(currentSeason) {
 
 // Function to check key presses
 function keyPressed() {
+    
+    // Check if we are in end game
+    if (!endgame) {
 
-    // Check for key press s
-    if (keyCode == KEY_S && !drowning) {
-        //increase the value of the current season variable to change season
-        currentSeason++;
-        //if the current season is equal to winter
-        if(currentSeason > 3) {
-            //set the new current season value to summer
-            currentSeason = 0;
+        // Check for key press s
+        if (keyCode == KEY_S && !drowning) {
+            //increase the value of the current season variable to change season
+            currentSeason++;
+            //if the current season is equal to winter
+            if(currentSeason > 3) {
+                //set the new current season value to summer
+                currentSeason = 0;
+            }
+            //run the changeSeason function
+            changeSeason(currentSeason);
         }
-        //run the changeSeason function
-        changeSeason(currentSeason);
     }
 }
