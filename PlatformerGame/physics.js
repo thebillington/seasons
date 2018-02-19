@@ -100,6 +100,20 @@ function playerCollision() {
                 
             }
             
+            // Check if this is ground
+            if (gameObjects[i].type == "ground") {
+                // Jump collision
+                while (jumpCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
+
+                    // Move the player up until they aren't colliding
+                    playerRect.y += gravity;
+
+                    // Set the y speed to 0
+                    ySpeed = 0;
+
+                }
+            }
+            
             // Check for ice
             if (gameObjects[i].type == "ice") {
                 
@@ -114,20 +128,6 @@ function playerCollision() {
                     
                     // Reset jump
                     jumped = false;
-                }
-            }
-            
-            // Check if this is ground
-            if (gameObjects[i].type == "ground") {
-                // Jump collision
-                while (jumpCollision(playerRect, {x: gameObjects[i].x * gridSquareSizeX, y: gameObjects[i].y * gridSquareSizeY, width: gridSquareSizeX, height:gridSquareSizeY})) {
-
-                    // Move the player up until they aren't colliding
-                    playerRect.y += gravity;
-
-                    // Set the y speed to 0
-                    ySpeed = 0;
-
                 }
             }
         
