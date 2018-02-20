@@ -19,11 +19,19 @@ var currentObject;
 // Store which object we are creating
 var creationSelection = "GROUND";
 
-// Variable to hold game elements
+// Variables to hold game elements
+var season = 0;
+var player;
+var goalRect;
+var keyArray;
 var ground;
 var water;
 var rocks;
 var trees;
+
+// Get the key image
+var keyImg;
+var playerImg;
 
 // Create the setup function to run before the game is initialized
 function setup() {
@@ -38,7 +46,12 @@ function setup() {
     // Create an empty array to hold the game objects
     gameObjects = [];
     
+    // Create the player and goal rects
+    player = {x: -100, y: -1, width: gridSquareSizeX * 0.7, height: 2*gridSquareSizeY};
+    goalRect = {x: -100, y: -1, width: gridSquareSizeX, height: gridSquareSizeY*2, colour: color(0)};
+    
     // Create game elements arrays
+    keyArray = [];
     ground = [];
     water = [];
     rocks = [];
@@ -46,6 +59,10 @@ function setup() {
     
     // Set the current object to -1
     currentObject = -1;
+    
+    // Get the key image
+    keyImg = loadImage("assets/key.png");
+    playerImg = loadImage("assets/playerAnimation/playerStill1.png");
     
 }
 
@@ -61,6 +78,39 @@ function draw() {
     // Draw all of the game objects
     drawGameObjects();
     
+    // Draw the keys
+    drawKeysEditor();
+    
+    // Draw the player
+    drawPlayerEditor();
+    
+    // Draw the goal
+    drawGoalEditor();
+    
+}
+    
+// Function to draw the player
+function drawPlayerEditor() {
+    
+    // Draw the player image
+    image(playerImg, player.x * gridSquareSizeX, player.y * gridSquareSizeY + gridSquareSizeY, player.width, player.height);
+    
+}
+
+// Function to draw the goal 
+function drawGoalEditor(){
+    //Draw the goal on screen
+    drawRect(goalRect.x * gridSquareSizeX, goalRect.y * gridSquareSizeY, goalRect.width, goalRect.height, goalRect.colour);
+}
+
+// Function to draw the keys for the goal
+function drawKeysEditor(){
+    // Draw the keys on screen
+    for(var i = 0; i < keyArray.length; i++) {
+        if(keyArray[i].visible) {
+            image(keyImg, keyArray[i].x * gridSquareSizeX, keyArray[i].y * gridSquareSizeY, keyArray[i].width, keyArray[i].height);
+        }
+    }
 }
 
 // Function to deal with mouse clicks
@@ -89,6 +139,26 @@ function mouseReleased() {
                 
                 // Switch for the different types of elements
                 switch(creationSelection) {
+                        
+                    case "PLAYER":
+                        
+                        // Set the players location
+                        player.x = x;
+                        player.y = y - 2;
+                        break;
+                        
+                    case "GOAL":
+                        
+                        // Set the players location
+                        goalRect.x = x;
+                        goalRect.y = y - 1;
+                        break;
+                        
+                    case "KEY":
+                        
+                        // Add a new key
+                        keyArray.push({x: x, y: y - 1, width: gridSquareSizeX * 2, height: gridSquareSizeY * 2, visible: true});
+                        break;
 
                     case "GROUND":
                 
