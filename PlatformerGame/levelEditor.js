@@ -100,7 +100,7 @@ function drawPlayerEditor() {
 // Function to draw the goal 
 function drawGoalEditor(){
     //Draw the goal on screen
-    drawRect(goalRect.x * gridSquareSizeX, goalRect.y * gridSquareSizeY, goalRect.width, goalRect.height, goalRect.colour);
+    drawRect((goalRect.x - 2) * gridSquareSizeX, (goalRect.y - 2) * gridSquareSizeY, goalRect.width, goalRect.height, goalRect.colour);
 }
 
 // Function to draw the keys for the goal
@@ -108,7 +108,7 @@ function drawKeysEditor(){
     // Draw the keys on screen
     for(var i = 0; i < keyArray.length; i++) {
         if(keyArray[i].visible) {
-            image(keyImg, keyArray[i].x * gridSquareSizeX, keyArray[i].y * gridSquareSizeY, keyArray[i].width, keyArray[i].height);
+            image(keyImg, keyArray[i].x * gridSquareSizeX, (keyArray[i].y - 2) * gridSquareSizeY, keyArray[i].width, keyArray[i].height);
         }
     }
 }
@@ -150,14 +150,14 @@ function mouseReleased() {
                     case "GOAL":
                         
                         // Set the players location
-                        goalRect.x = x;
-                        goalRect.y = y - 1;
+                        goalRect.x = x + 2;
+                        goalRect.y = y + 1;
                         break;
                         
                     case "KEY":
                         
                         // Add a new key
-                        keyArray.push({x: x, y: y - 1, width: gridSquareSizeX * 2, height: gridSquareSizeY * 2, visible: true});
+                        keyArray.push({x: x, y: y + 1, width: gridSquareSizeX * 2, height: gridSquareSizeY * 2, visible: true});
                         break;
 
                     case "GROUND":
@@ -199,8 +199,14 @@ function objectAtLocation(x, y) {
 // Create a function to select an object drawing tool
 function select(obj) {
     
+    // Check if we are setting the season
+    if (obj == "SEASON") {
+        season = document.getElementById('season').value;
+        return;
+    }
+    
     // Select the object
-    creationSelection = obj;    
+    creationSelection = obj;  
     
 }
 
@@ -209,12 +215,18 @@ function getLevelData() {
 	
 	// Create an empty string to store the level data
 	var levelData = "";
-    
-    console.log(ground.length);
 	
 	// Get the attribute numbers
-	levelData += ground.length + "\n" + water.length + "\n" + rocks.length + "\n" + trees.length + "\n";
-
+	levelData += season + "\n" + player.x + "\n" + player.y + "\n" + goalRect.x + "\n" + goalRect.y + "\n" + keyArray.length + "\n";
+    levelData += ground.length + "\n" + water.length + "\n" + rocks.length + "\n" + trees.length + "\n";
+    
+    // For each key element
+    for (var i = 0; i < keyArray.length; i++) {
+        
+        // Make keys
+        levelData += keyArray[i].x + " " + keyArray[i].y + "\n";
+        
+    }
     
     // For each game element
     for (var i = 0; i < ground.length; i++) {
@@ -244,8 +256,6 @@ function getLevelData() {
     
     // Store the text
     document.getElementById("levelData").value = levelData.trim();
-    
-    console.log(levelData.trim());
     
     // Select the level data
     document.getElementById("levelData").select();
