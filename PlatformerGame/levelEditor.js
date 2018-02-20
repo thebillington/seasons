@@ -217,7 +217,7 @@ function getLevelData() {
 	var levelData = "";
 	
 	// Get the attribute numbers
-	levelData += season + "\n" + player.x + "\n" + player.y + "\n" + goalRect.x + "\n" + goalRect.y + "\n" + keyArray.length + "\n";
+	levelData += "\n" + season + "\n" + player.x + "\n" + player.y + "\n" + goalRect.x + "\n" + goalRect.y + "\n" + keyArray.length + "\n";
     levelData += ground.length + "\n" + water.length + "\n" + rocks.length + "\n" + trees.length + "\n";
     
     // For each key element
@@ -272,19 +272,41 @@ function setLevelData() {
 	var levelData = document.getElementById("levelData").value.split("\n");
     
     // Empty the game objects
+    keyArray = [];
     ground = [];
     water = [];
     rocks = [];
     trees = [];
+    
+    // Set the number of set variables
+    var setVars = 11;
 	
 	// Check the number of each game elements
-	var noGround = parseInt(levelData[0]);
-	var noWater = parseInt(levelData[1]);
-	var noRocks = parseInt(levelData[2]);
-	var noTrees = parseInt(levelData[3]);
+    nextLevel = levelData[0];
+    currentSeason = parseInt(levelData[1]);
+    player.x = parseInt(levelData[2]) * gridSquareSizeX;
+    player.y = parseInt(levelData[3]) * gridSquareSizeY;
+    goalRect.x = (parseInt(levelData[4]) - 2) * gridSquareSizeX;
+    goalRect.y = (parseInt(levelData[5]) - 2) * gridSquareSizeY;
+    var noKeys = parseInt(levelData[6]);
+	var noGround = parseInt(levelData[7]);
+	var noWater = parseInt(levelData[8]);
+	var noRocks = parseInt(levelData[9]);
+	var noTrees = parseInt(levelData[10]);
+    
+    // Fetch the keys
+    for (var i = setVars; i < setVars + noKeys; i++) {
+        
+        // Split the current line
+        var data = levelData[i].split(" ");
+
+        // Add the key
+        keyArray.push({x: parseInt(data[0]), y: parseInt(data[1]), width: gridSquareSizeX* 2, height: gridSquareSizeY * 2, visible: true});
+
+    }
     
     // Fetch the ground
-    for (var i = 4; i < 4 + noGround; i++) {
+    for (var i = setVars + noKeys; i < setVars + noKeys + noGround; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -295,7 +317,7 @@ function setLevelData() {
     }
     
     // Fetch the water
-    for (var i = 4 + noGround; i < 4 + noGround + noWater; i++) {
+    for (var i = setVars + noKeys + noGround; i < setVars + noKeys + noGround + noWater; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -305,8 +327,8 @@ function setLevelData() {
         
     }
     
-    // Fetch the rocks
-    for (var i = 4 + noGround + noWater; i < 4 + noGround + noWater + noRocks; i++) {
+    // Fetch the water
+    for (var i = setVars + noKeys + noGround + noWater; i < setVars + noKeys + noGround + noWater + noRocks; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
@@ -316,20 +338,16 @@ function setLevelData() {
         
     }
     
-    // Fetch the trees
-    for (var i = 4 + noGround + noWater + noRocks; i < 4 + noGround + noWater + noRocks + noTrees; i++) {
+    // Fetch the water
+    for (var i = setVars + noKeys + noGround + noWater + noRocks; i < setVars + noKeys + noGround + noWater + noRocks + noTrees; i++) {
         
         // Split the current line
         var data = levelData[i].split(" ");
-        
-        console.log(data);
         
         // Create the ground
         trees.push(GameElement(parseInt(data[0]), parseInt(data[1]), -1, parseInt(data[2])));
         
     }
-    
-    console.log(trees);
     
     // Rebuild the game objects
     makeGameObjects();
