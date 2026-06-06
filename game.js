@@ -60,7 +60,8 @@ var running = false;
 // Load objects in before the game loads
 function preload() {
     
-    document.getElementById('p5_loading').innerHTML = "Getting animations...";
+    let loadingEl = document.getElementById('p5_loading');
+    if (loadingEl) loadingEl.innerHTML = "Getting animations...";
     
     // Setup the animation reel
     setupAnimationReel();
@@ -111,7 +112,7 @@ function setup() {
         running = true;
         
         // Load the level
-        loadLevel("levelOne.txt");
+        loadLevel("tutorialOne.txt");
         firstLoad = false;
 
         // Initilise the goal rectangle

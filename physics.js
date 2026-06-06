@@ -278,13 +278,8 @@ function checkPortal() {
         // Reset
         setup();
         
-        // Set on ice to false
-        onice = false;
-        
-        // Reset the goal colour
-        goalRect.colour = color(0);
+        onIce = false;
 
-        // Reload the level
         loadLevel(nextLevel);
         
         // Restart thew game running
@@ -311,10 +306,8 @@ function die() {
     // Restart the game running
     running = true;
     
-    // Set on ice to false
-    onice = false;
+    onIce = false;
 
-    // Reload the level
     loadLevel(currentLevel);
     
 }

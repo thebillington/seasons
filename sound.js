@@ -10,17 +10,18 @@ function setupMusic() {
     // Create an empty array of songs and populate
     songs = [];
     try {
-        document.getElementById('p5_loading').innerHTML = "Getting music tracks (1/6)...";
+        let el = document.getElementById('p5_loading');
+        if (el) el.innerHTML = "Getting music tracks (1/6)...";
         songs.push(loadSound("music/bensound-betterdays.mp3"));
-        document.getElementById('p5_loading').innerHTML = "Getting music tracks (2/6)...";
+        if (el) el.innerHTML = "Getting music tracks (2/6)...";
         songs.push(loadSound("music/bensound-memories.mp3"));
-        document.getElementById('p5_loading').innerHTML = "Getting music tracks (3/6)...";
+        if (el) el.innerHTML = "Getting music tracks (3/6)...";
         songs.push(loadSound("music/bensound-ofeliasdream.mp3"));
-        document.getElementById('p5_loading').innerHTML = "Getting music tracks (4/6)...";
+        if (el) el.innerHTML = "Getting music tracks (4/6)...";
         songs.push(loadSound("music/bensound-sadday.mp3"));
-        document.getElementById('p5_loading').innerHTML = "Getting music tracks (5/6)...";
+        if (el) el.innerHTML = "Getting music tracks (5/6)...";
         songs.push(loadSound("music/bensound-slowmotion.mp3"));
-        document.getElementById('p5_loading').innerHTML = "Getting music tracks (6/6)...";
+        if (el) el.innerHTML = "Getting music tracks (6/6)...";
         songs.push(loadSound("music/bensound-tomorrow.mp3"));
     } catch (err) {
         console.log(err.message);

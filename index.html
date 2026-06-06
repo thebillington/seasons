@@ -16,10 +16,26 @@
     <style>canvas {border: 2px solid black;}</style>
   </head>
   <body id="main" style="overflow:hidden; margin: 0; display: flex; justify-content: center; align-items: center; padding-top: 5%; background-color: #FBF4E1;">
+      <div id="startOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 100; cursor: pointer;">
+          <div style="text-align: center; color: white; font-family: sans-serif;">
+              <h1>Seasons</h1>
+              <p>A time-travel platformer</p>
+              <p style="font-size: 1.5em; margin-top: 40px;">Click to Start</p>
+          </div>
+      </div>
       <div style="bottom:0; padding: 20px; position: absolute; text-align: center;">
           <h3>Music used under creative commons courtesy of <a href="http://bensound.com" target="_blank">BenSound</a></h3>
           <p>Due to some compatability issues, for best results, play Seasons in Chrome</p>
           <p><a href="http://github.com/thebillington/gamesPlusJamOne" target="_blank">Source code</a></p>
       </div>
+      <script>
+          document.getElementById('startOverlay').addEventListener('click', function() {
+              this.style.display = 'none';
+              if (typeof getAudioContext === 'function') {
+                  let ctx = getAudioContext();
+                  if (ctx && ctx.state === 'suspended') ctx.resume();
+              }
+          });
+      </script>
   </body>
 </html>
